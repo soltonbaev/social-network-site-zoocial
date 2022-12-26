@@ -31,3 +31,26 @@ async function test() {
   console.log(result);
 }
 test();
+
+// grab login elements
+let inpUserLogin = document.getElementsByClassName("social__login-user")[0];
+let inpPassLogin = document.getElementsByClassName("social__login-pass")[0];
+let btnLogin = document.getElementsByClassName("social__login-btn")[0];
+//grab create elements
+let inpUserCreate = document.getElementsByClassName("social__create-user")[0];
+let inpPassCreate = document.getElementsByClassName("social__create-user")[0];
+let inpEmailCreate = document.getElementsByClassName("social__create-email")[0];
+let btnCreate = document.getElementsByClassName("social__create-pass")[0];
+
+btnLogin.addEventListener("click", () => {});
+btnCreate.addEventListener("click", () => {});
+
+// create new user
+function createNewUser() {
+  const newUser = {
+    username: inpUserCreate.value,
+    email: inpEmailCreate,
+    password: inpPassCreate,
+    posts: [],
+  };
+}
