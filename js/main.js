@@ -5,6 +5,7 @@ const API = "https://sltnbv-json-server.herokuapp.com/hackathon-dom-js";
 async function getData() {
   const response = await fetch(API);
   const result = await response.json();
+
   return result;
 }
 
@@ -19,3 +20,14 @@ async function setData(dataObj) {
   };
   await fetch(API, options);
 }
+
+// function to test writing and getting data from JSON server
+async function test() {
+  const testObj = {
+    test: "test",
+  };
+  await setData(testObj);
+  let result = await getData();
+  console.log(result);
+}
+test();
