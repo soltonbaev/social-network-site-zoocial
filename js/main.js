@@ -87,6 +87,7 @@ async function deleteData(id) {
 // login existing user
 async function loginUser() {
   let users = await getData();
+
   users.forEach((user) => {
     if (
       user.username === inpUserLogin.value &&
@@ -96,6 +97,11 @@ async function loginUser() {
       loginModal.classList.add("first-screen__hide");
       welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${user.name}</h1>`;
       return;
+    } else {
+      inpUserLogin.value = "try again";
+      inpPassLogin.style.borderColor = "red";
+      inpUserLogin.style.borderColor = "red";
+      inpPassLogin.value = "";
     }
   });
 }
