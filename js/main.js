@@ -1,6 +1,8 @@
 // set JSON server API
 const API = "https://sltnbv-json-server.herokuapp.com/hackathon-dom-js";
 
+let userId = null;
+
 // get data from JSON server
 async function getData() {
   const response = await fetch(API);
@@ -68,11 +70,19 @@ btnCreate.addEventListener("click", async function () {
 
 // create new user
 async function createNewUser() {
+  //   users = await getData();
+  //   users.forEach((user) => {
+  //     // if (inpUserCreate.value === user.username) {
+  //     //   inpUserCreate.value = "username is taken";
+  //     //   inpUserCreate.style.borderColor = "red";
+  //     //   return;
+  //     // }
+  //   });
   const newUser = {
     name: inpName.value,
     lastName: inpLastName.value,
-    username: inpUserCreate.value,
     email: inpEmailCreate.value,
+    username: inpUserCreate.value,
     password: inpPassCreate.value,
     posts: [],
   };
@@ -87,23 +97,26 @@ async function deleteData(id) {
 // login existing user
 async function loginUser() {
   let users = await getData();
-
-  users.forEach((user) => {
+  let isUserAuthenticated = false;
+  for (let i = 0; i < users.length; i++) {
     if (
-      user.username === inpUserLogin.value &&
-      user.password === inpPassLogin.value
+      inpUserLogin.value === users[i].username &&
+      inpPassLogin.value === users[i].password
     ) {
+      userId = users[i].id;
+      isUserAuthenticated == true;
       console.log("Login successful");
       loginModal.classList.add("first-screen__hide");
-      welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${user.name}</h1>`;
-      return;
-    } else {
-      inpUserLogin.value = "try again";
-      inpPassLogin.style.borderColor = "red";
-      inpUserLogin.style.borderColor = "red";
-      inpPassLogin.value = "";
+      welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
+      break;
     }
-  });
+  }
+  if (!isUserAuthenticated) {
+    inpUserLogin.value = "try again";
+    inpPassLogin.style.borderColor = "red";
+    inpUserLogin.style.borderColor = "red";
+    inpPassLogin.value = "";
+  }
 }
 
 // remove all data from JSON server
