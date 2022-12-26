@@ -8,27 +8,54 @@
     <title>HACKATHON DOM JS by Ibraim & Isken</title>
   </head>
   <body>
-    <div class="social__login">
-      <div class="social__login-wrapper">
-        <h2 class="social__heading">Login to your account</h2>
-        <input class="social__login-user" type="text" placeholder="username" />
+    <div class="first-screen">
+      <div class="first-screen__login-wrapper">
+        <h2 class="first-screen__heading">Login to your account</h2>
         <input
-          class="social__login-pass"
+          class="first-screen__login-user"
+          type="text"
+          placeholder="username"
+        />
+        <input
+          class="first-screen__login-pass"
           type="password"
           placeholder="password"
         />
-        <button class="social__login-btn">Login</button>
+        <button class="first-screen__login-btn">Login</button>
       </div>
-      <div class="social__create">
-        <h2 class="social__heading">Create new account</h2>
-        <input class="social__create-user" type="text" placeholder="username" />
-        <input class="social__create-email" type="email" placeholder="email" />
+      <div class="first-screen__create">
+        <h2 class="first-screen__heading">Create new account</h2>
         <input
-          class="social__create-pass"
+          class="first-screen__create-name"
+          type="text"
+          placeholder="First Name"
+        />
+        <input
+          class="first-screen__create-lname"
+          type="text"
+          placeholder="Last Name"
+        />
+        <input
+          class="first-screen__create-user"
+          type="text"
+          placeholder="username"
+        />
+        <input
+          class="first-screen__create-email"
+          type="email"
+          placeholder="email"
+        />
+        <input
+          class="first-screen__create-pass"
           type="password"
           placeholder="create a password"
         />
-        <button class="social__create-btn">Create</button>
+        <button class="first-screen__create-btn">Create</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="welcome">
+        <span class="welcome__msg"></span>
       </div>
     </div>
     <script src="./js/main.js"></script>
