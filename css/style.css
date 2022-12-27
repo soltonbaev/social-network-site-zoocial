@@ -115,15 +115,15 @@ body {
 
 /* sidebar css */
 .logo {
-  width: 120px;
-  height: 70px;
-  margin-top: 30px;
+  width: 150px;
+  height: 90px;
 }
 
 .sidebar__wrapper {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  font-size: 25px;
   list-style: none;
   display: flex;
   flex-direction: column;
