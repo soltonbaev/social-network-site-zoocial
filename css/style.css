@@ -14,6 +14,8 @@ body {
 .container {
   display: flex;
   justify-content: space-evenly;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .sidebar,
@@ -108,6 +110,13 @@ body {
   margin-bottom: 50px;
 }
 
+/* sidebar css */
+.logo {
+  width: 120px;
+  height: 70px;
+  margin-top: 30px;
+}
+
 .sidebar__wrapper {
   list-style: none;
   display: flex;
@@ -121,7 +130,19 @@ body {
 
 .sidebar-icons {
   position: absolute;
-  left: 20px;
+  left: 70px;
+}
+
+.tweet-inp {
+  width: 240px;
+  height: 30px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  margin-bottom: 30px;
+  background-color: #273340;
+  color: #e7e9ea;
 }
 
 /* custom classes */
@@ -133,4 +154,39 @@ body {
 }
 .display-flex {
   display: flex;
+}
+
+.posts__btn-add {
+  background-color: #1d9bf0;
+  color: #ffffff;
+  height: 40px;
+  width: 93px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 168px;
+}
+
+/* search input  */
+.search-input {
+  padding-left: 30px;
+  color: #dee0e1;
+  border-radius: 8px;
+  height: 40px;
+  width: 240px;
+  border: #202327;
+  background-color: #273340;
+  outline: none;
+}
+
+.theme {
+  width: 200px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-img {
+  position: absolute;
 }
