@@ -204,7 +204,14 @@ async function renderPosts() {
                                  <span class="posts__post-likes">${post.likes}</span>
                                  <div class="posts__post-comments"></div>
                                 </div>
-                                <button id ="${post.postId}" class="posts__post-delete">Delete Post</button><button id ="${post.postId}" class="posts__post-edit">Edit Post</button>`;
+                                <div class = "post-icons"><div><img class="posts__post-likes" src ="./images/like.svg">
+                                </img>
+                                <img class="posts__post-comments" src ="./images/comments.svg">
+                                </img>
+                                </div><div><img src="./images/delete.svg" id ="${post.postId}" class="posts__post-delete">
+                                </img>
+                                <img src = "./images/edit.svg" id ="${post.postId}" class="posts__post-edit">
+                                </img></div></div>`;
     // let postDelete = document.getElementsByClassName("posts__post-delete")[0];
     // let postEdit = document.getElementById("edit-" + post.postId);
     // console.log(postEdit);

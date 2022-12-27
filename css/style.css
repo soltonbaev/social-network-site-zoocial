@@ -243,6 +243,31 @@ body {
   position: absolute;
 }
 
+/* post css */
+
+.posts__post-wrapper {
+  background-color: #273340;
+  padding-left: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 7px;
+  margin-top: 30px;
+}
+
+.post-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.posts__post-comments {
+  margin-left: 20px;
+}
+
+.posts__post-delete {
+  margin-right: 20px;
+}
+
 /* custom classes */
 .display-block {
   display: block;
