@@ -247,3 +247,22 @@ async function nukeAll() {
 }
 
 // nukeAll();
+
+// show registration
+const regis = document.getElementsByClassName("regis")[0];
+const login = document.getElementsByClassName("login")[1];
+const regisForm = document.getElementsByClassName("first-screen__create")[0];
+const loginForm = document.getElementsByClassName(
+  "first-screen__login-wrapper"
+)[0];
+
+regis.addEventListener("click", (e) => {
+  regisForm.classList.add("display-flex");
+  loginForm.classList.add("display-none");
+});
+
+login.addEventListener("click", (e) => {
+  loginForm.classList.add("display-block");
+  loginForm.classList.remove("display-none");
+  regisForm.classList.remove("display-flex");
+});

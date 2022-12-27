@@ -10,57 +10,81 @@
   <body>
     <div class="first-screen">
       <div class="first-screen__login-wrapper">
-        <h2 class="first-screen__heading heading">Login to your account</h2>
-        <input
-          class="first-screen__login-user"
-          type="text"
-          placeholder="username"
-        />
-        <input
-          class="first-screen__login-pass heading"
-          type="password"
-          placeholder="password"
-        />
-        <button class="first-screen__login-btn">Login</button>
+        <div class="first-screen__headers">
+          <h2 class="first-screen__heading login">Login</h2>
+          <h2 class="first-screen__heading regis">Registration</h2>
+        </div>
+        <div class="first-screen__inputs">
+          <input
+            class="first-screen__login-user"
+            type="text"
+            placeholder="username"
+          />
+          <input
+            class="first-screen__login-pass heading"
+            type="password"
+            placeholder="password"
+          />
+          <button class="first-screen__login-btn">Login</button>
+        </div>
       </div>
       <div class="first-screen__create">
-        <h2 class="first-screen__heading">Create new account</h2>
+        <div class="first-screen__headers">
+          <h2 class="first-screen__heading login">Login</h2>
+          <h2 class="first-screen__heading regis">Registration</h2>
+        </div>
         <input
-          class="first-screen__create-name"
+          class="first-screen__create-name create-inp"
           type="text"
           placeholder="First Name"
         />
         <input
-          class="first-screen__create-lname"
+          class="first-screen__create-name create-inp"
           type="text"
           placeholder="Last Name"
         />
         <input
-          class="first-screen__create-email"
+          class="first-screen__create-email create-inp"
           type="email"
           placeholder="email"
         />
         <input
-          class="first-screen__create-user"
+          class="first-screen__create-user create-inp"
           type="text"
           placeholder="username"
         />
 
         <input
-          class="first-screen__create-pass"
+          class="first-screen__create-pass create-inp"
           type="password"
           placeholder="create a password"
         />
-        <button class="first-screen__create-btn">Create</button>
+        <button class="first-screen__create-btn create-btn">Create</button>
         <span class="first-sreen__create-msg"></span>
       </div>
     </div>
     <div class="container hide">
       <div class="sidebar">
+        <img class="logo" src="/HACKATHON-DOM-JS/images/logo.jpeg" alt="" />
         <ul class="sidebar__wrapper">
-          <li>My posts</li>
-          <li>Timeline</li>
-          <li>My account</li>
+          <li class="sidebar-items mt-0">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/Home.svg"
+            />Home
+          </li>
+          <li class="sidebar-items">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/explore.svg"
+            />Explore
+          </li>
+          <li class="sidebar-items">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/profile.svg"
+            />Profile
+          </li>
         </ul>
       </div>
       <div class="posts">
@@ -69,14 +93,22 @@
         </div>
         <div class="posts__inputs">
           <h2 class="posts__heading heading">What is on your mind?</h2>
-          <input type="text" class="posts__title" placeholder="enter title" />
           <input
             type="text"
-            class="posts__body"
+            class="posts__title tweet-inp"
+            placeholder="enter title"
+          />
+          <input
+            type="text"
+            class="posts__body tweet-inp"
             placeholder="write a post here"
           />
-          <input type="url" class="posts__img" placeholder="enter image url" />
-          <button class="posts__btn-add">Create post</button>
+          <input
+            type="url"
+            class="posts__img tweet-inp"
+            placeholder="enter image url"
+          />
+          <button class="posts__btn-add">Tweet</button>
         </div>
         <div class="posts__modal-edit hide">
           <input
@@ -96,18 +128,25 @@
         </div>
         <div class="posts__content"></div>
       </div>
-      <div class="news">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis
-        est expedita quos deleniti corporis, architecto fuga provident maxime
-        libero aliquam, non nihil, aperiam eligendi cum ad dolores deserunt in
-        pariatur? Omnis quae ipsa porro in iste blanditiis laudantium, suscipit
-        ullam modi enim totam delectus tempore facere consequatur alias
-        obcaecati. Dolorem esse, placeat nemo, accusantium a quod similique
-        nihil officia, eum illo beatae quam commodi consequatur veniam facilis
-        nam optio. Dolor, recusandae placeat modi rem saepe aliquid dolores.
-        Cupiditate quisquam repudiandae expedita nemo doloremque, obcaecati
-        perferendis, sed tempore ullam aperiam, quasi ut incidunt dolorem
-        possimus voluptatum architecto ab commodi! Eligendi, repellat.
+      <div>
+        <div class="search">
+          <img class="search-img" src="images/search.svg" alt="" />
+          <input class="search-input" type="text" />
+        </div>
+        <div class="news">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis
+          est expedita quos deleniti corporis, architecto fuga provident maxime
+          libero aliquam, non nihil, aperiam eligendi cum ad dolores deserunt in
+          pariatur? Omnis quae ipsa porro in iste blanditiis laudantium,
+          suscipit ullam modi enim totam delectus tempore facere consequatur
+          alias obcaecati. Dolorem esse, placeat nemo, accusantium a quod
+          similique nihil officia, eum illo beatae quam commodi consequatur
+          veniam facilis nam optio. Dolor, recusandae placeat modi rem saepe
+          aliquid dolores. Cupiditate quisquam repudiandae expedita nemo
+          doloremque, obcaecati perferendis, sed tempore ullam aperiam, quasi ut
+          incidunt dolorem possimus voluptatum architecto ab commodi! Eligendi,
+          repellat.
+        </div>
       </div>
       <div class="timeline hide"></div>
     </div>
