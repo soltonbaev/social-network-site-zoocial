@@ -4,6 +4,7 @@ const API = "https://sltnbv-json-server.herokuapp.com/hackathon-dom-js";
 
 let userId = null;
 let userName;
+let userlName;
 let userHandle;
 let userPic;
 function getDate() {
@@ -73,6 +74,12 @@ const profileForm = document.getElementsByClassName("profile")[0];
 
 const postForm = document.getElementsByClassName("posts")[0];
 // const exploreIcon = document.getElementsByClassName("explore-icon")[0];
+
+// get profile elements
+let profileTopName = document.getElementsByClassName("posts")[0];
+let tweetCount = document.getElementsByClassName("posts")[0];
+let profileBottomHandle = document.getElementsByClassName("posts")[0];
+let profilebottomName = document.getElementsByClassName("posts")[0];
 
 home.addEventListener("click", () => {
   profileForm.classList.add("hide");
@@ -243,6 +250,7 @@ async function loginUser() {
     ) {
       userId = users[i].id;
       userName = users[i].name;
+      userlName = users[i].lastName;
       userHandle = users[i].username;
       userPic = users[i].userPic;
       isUserAuthenticated == true;
@@ -270,20 +278,41 @@ async function renderPosts() {
   postsContent.innerHTML = "";
   posts.forEach((post) => {
     postsContent.innerHTML += `<div class="posts__post-wrapper">
-    <img class="userpic" src="${userPic}"><span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span> <span class="posts__post-date">${post.postDate}</span>
-                                 <h3 id="title-${post.postId}">${post.title}</h3> 
+    <img class="userpic" src="${userPic}">
+    <span class="posts__post-name">${userName}</span>
+     <span class="posts__post-username"> @${userHandle}</span>
+      <span class="posts__post-date"> ${post.postDate}</span>
+                                 <h3 id="title-${post.postId}">${
+      post.title
+    }</h3> 
                                  <p id="body-${post.postId}">${post.body}</p>  
-                                 <img id="img-${post.postId}" src="${post.imgUrl}">
-                                 <span id="heart-count-${post.postId}" class="posts__post-likes">${post.likes}</span>
+                                 <img id="img-${post.postId}" src="${
+      post.imgUrl
+    }">
+                                
                                  <div class="posts__post-comments"></div>
                                 </div>
-                                <div class = "post-icons"><div><img id="${post.postId}" class="posts__post-likes-heart" src ="./images/like.svg">
-                                </img>
+                                <div class = "post-icons"><div>
+                                <img id="${
+                                  post.postId
+                                }" class="posts__post-likes-heart" src ="${
+      post.likes == 0 ? "./images/like.svg" : "./images/liked.svg"
+    }">
+                                </img> <span id="heart-count-${
+                                  post.postId
+                                }" class="posts__post-likes">${
+      post.likes
+    }</span>
                                 <img class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
-                                </div><div><img src="./images/delete.svg" id ="${post.postId}" class="posts__post-delete">
+                                </div>
+                                <div><img src="./images/delete.svg" id ="${
+                                  post.postId
+                                }" class="posts__post-delete">
                                 </img>
-                                <img src = "./images/edit.svg" id ="${post.postId}" class="posts__post-edit">
+                                <img src = "./images/edit.svg" id ="${
+                                  post.postId
+                                }" class="posts__post-edit">
                                 </img></div></div>`;
   });
 }
@@ -316,15 +345,34 @@ async function getTimelinePosts() {
   users.forEach((user) => {
     user.posts.forEach((post) => {
       timeline.innerHTML += `<div class="posts__post-wrapper">
-    <img class="userpic" src="${user.userPic}"><span class="posts__post-name">${user.name}</span> <span class="posts__post-username">@${user.username}</span><span class="posts__post-date">${post.postDate}</span>
-                                 <h3 id="title-${post.postId}">${post.title}</h3> 
+    <img class="userpic" src="${user.userPic}">
+    <span class="posts__post-name">${
+      user.name
+    }</span> <span class="posts__post-username">@${
+        user.username
+      }</span><span class="posts__post-date">${post.postDate}</span>
+                                 <h3 id="title-${post.postId}">${
+        post.title
+      }</h3> 
                                  <p id="body-${post.postId}">${post.body}</p>  
-                                 <img id="img-${post.postId}" src="${post.imgUrl}">
-                                 <span id="heart-count-${post.postId}" class="posts__post-likes">${post.likes}</span>
-                                 <div class="posts__post-comments"></div>
+                                 <img id="img-${post.postId}" src="${
+        post.imgUrl
+      }">
+                                 
+                                 <div class="posts__post-comments">
+                                 </div>
                                 </div>
-                                <div class = "post-icons"><div><img name="${user.id}" id="${post.postId}" class="posts__post-likes-heart" src ="./images/like.svg">
-                                </img>
+                                <div class = "post-icons">
+                                <div><img name="${user.id}" id="${
+        post.postId
+      }" class="posts__post-likes-heart" src="${
+        post.likes == 0 ? "./images/like.svg" : "./images/liked.svg"
+      }">
+                                </img><span id="heart-count-${
+                                  post.postId
+                                }" class="posts__post-likes">${
+        post.likes
+      }</span>
                                 <img class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
                                 </div><div>

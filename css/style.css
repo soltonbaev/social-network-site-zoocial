@@ -296,7 +296,7 @@ body {
   height: 50px;
   width: 285px;
   border: #202327;
-  background-color: #1d9bf0;
+  background-color: #0f2a3b;
   outline: none;
   margin-top: 30px;
 }
@@ -339,7 +339,8 @@ body {
 .profile__background-img {
   width: 600px;
 }
-.profile__profile-img {
+
+.profile__profile-img img {
   width: 70px;
   height: 70px;
   position: relative;
