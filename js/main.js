@@ -7,7 +7,9 @@ let userName;
 let userlName;
 let userHandle;
 let userPic;
+let userObject;
 let loginState = getLogIn();
+console.log(loginState);
 function getDate() {
   let date = new Date();
   let buildDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
@@ -18,7 +20,6 @@ function getDate() {
 
 // the hour in UTC+0 time zone (London time without daylight savings)
 
-console.log("global userpic", userPic);
 //! ===========================================GRAB ELEMENTS=======================================
 // grab login elements
 let inpUserLogin = document.getElementsByClassName(
@@ -94,6 +95,7 @@ home.addEventListener("click", () => {
   profileForm.classList.add("hide");
   postForm.classList.remove("hide");
   timelineContainer.classList.add("hide");
+  renderPosts();
 });
 
 profileIcon.addEventListener("click", () => {
@@ -119,6 +121,7 @@ sidebarExplore.addEventListener("click", () => {
   profileForm.classList.add("hide");
   posts.classList.add("hide");
   timelineContainer.classList.remove("hide");
+  getTimelinePosts();
 });
 
 // listeners
@@ -199,7 +202,7 @@ async function createNewUser() {
     email: inpEmailCreate.value,
     username: inpUserCreate.value,
     password: inpPassCreate.value,
-    userPic: "./images/userPic.png",
+    userPic: "https://xsgames.co/randomusers/avatar.php?g=pixel",
     posts: [],
     dateJoined: getDate(),
   };
@@ -251,7 +254,7 @@ async function deleteData(type, id) {
       body: JSON.stringify({ posts: posts }),
     };
     await fetch(`${API}/${userId}`, options);
-    renderPosts();
+    await renderPosts();
   }
 }
 
@@ -278,27 +281,17 @@ async function loginUser() {
       inpPassLogin.value === users[i].password
     ) {
       isUserAuthenticated = true;
-      console.log("Login successful");
-      userId = users[i].id;
-      userName = users[i].name;
-      userlName = users[i].lastName;
-      userHandle = users[i].username;
-      userPic = users[i].userPic;
-
-      loginModal.classList.add("hide");
-      container.classList.remove("hide");
-      welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
-      tweetCount.innerText = `Tweets: ${await countPosts()}`;
-      profileTopName.innerText = userName;
-      profileBottomHandle.innerText = userHandle;
-      profileBottomName.innerText = `${userName} ${userlName}`;
-      joined.innerText = "Date joined " + users[i].dateJoined;
+      setUserGlobals(users[i]);
+      await setProfileData(users[i]);
       setLogIn(true, users[i].id);
-      renderPosts();
+      await renderPosts();
       break;
     }
   }
-  if (!isUserAuthenticated) {
+  if (isUserAuthenticated) {
+    loginModal.classList.add("hide");
+    container.classList.remove("hide");
+  } else {
     inpUserLogin.value = "try again";
     inpPassLogin.style.borderColor = "red";
     inpUserLogin.style.borderColor = "red";
@@ -308,79 +301,43 @@ async function loginUser() {
 }
 
 async function checkLogin() {
-  if (loginState.state === true) {
+  if (loginState && loginState.state === true) {
     loginModal.classList.add("hide");
+    container.classList.remove("hide");
     let users = await getData("users");
     for (let i = 0; i < users.length; i++) {
       if (loginState.userId === users[i].id) {
-        console.log("Login successful");
-        userId = users[i].id;
-        userName = users[i].name;
-        userlName = users[i].lastName;
-        userHandle = users[i].username;
-        userPic = users[i].userPic;
-
-        container.classList.remove("hide");
-        welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
-        tweetCount.innerText = `Tweets: ${await countPosts()}`;
-        profileTopName.innerText = userName;
-        profileBottomHandle.innerText = userHandle;
-        profileBottomName.innerText = `${userName} ${userlName}`;
-        joined.innerText = "Date joined " + users[i].dateJoined;
-        renderPosts();
+        setUserGlobals(users[i]);
+        await setProfileData(users[i]);
+        await renderPosts();
         break;
       }
     }
   }
 }
 
+function setUserGlobals(userObj) {
+  welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${userObj.name}</h1>`;
+  userObject = userObj;
+  userId = userObj.id;
+  userName = userObj.name;
+  userlName = userObj.lastName;
+  userHandle = userObj.username;
+  userPic = userObj.userPic;
+}
+
+async function setProfileData(userObj) {
+  tweetCount.innerText = `Tweets: ${await countPosts()}`;
+  profileTopName.innerText = userName;
+  profileBottomHandle.innerText = userHandle;
+  profileBottomName.innerText = `${userName} ${userlName}`;
+  console.log(userObj.dateJoined);
+  joined.innerText = "Date joined " + userObj.dateJoined;
+}
+
 checkLogin();
 
 // render posts
-
-async function renderPosts() {
-  let posts = await getData("posts");
-  postsContent.innerHTML = "";
-  posts.forEach((post) => {
-    postsContent.innerHTML += `<div class="posts__post-wrapper">
-    <img class="userpic" src="${userPic}">
-    <span class="posts__post-name">${userName}</span>
-     <span class="posts__post-username"> @${userHandle}</span>
-      <span class="posts__post-date"> ${post.postDate}</span>
-                                 <h3 id="title-${post.postId}">${
-      post.title
-    }</h3> 
-                                 <p id="body-${post.postId}">${post.body}</p>  
-                                 <img id="img-${post.postId}" src="${
-      post.imgUrl
-    }">
-                                
-                                 <div class="posts__post-comments"></div>
-                                </div>
-                                <div class = "post-icons"><div>
-                                <img id="${
-                                  post.postId
-                                }" class="posts__post-likes-heart" src ="${
-      post.likes == 0 ? "./images/like.svg" : "./images/liked.svg"
-    }">
-                                </img> <span id="heart-count-${
-                                  post.postId
-                                }" class="posts__post-likes">${
-      post.likes
-    }</span>
-                                <img class="posts__post-comments" src ="./images/comments.svg">
-                                </img>
-                                </div>
-                                <div><img src="./images/delete.svg" id ="${
-                                  post.postId
-                                }" class="posts__post-delete">
-                                </img>
-                                <img src = "./images/edit.svg" id ="${
-                                  post.postId
-                                }" class="posts__post-edit">
-                                </img></div></div>`;
-  });
-}
 
 async function setGlobalLikes(data, id, uId) {
   let posts = await getData("userPosts", uId);
@@ -408,45 +365,9 @@ async function getTimelinePosts() {
   let users = await getData("users");
   timeline.innerHTML = "";
   users.forEach((user) => {
-    user.posts.forEach((post) => {
-      timeline.innerHTML += `<div class="posts__post-wrapper">
-    <img class="userpic" src="${user.userPic}">
-    <span class="posts__post-name">${
-      user.name
-    }</span> <span class="posts__post-username">@${
-        user.username
-      }</span><span class="posts__post-date">&nbsp${post.postDate}</span>
-                                 <h3 id="title-${post.postId}">${
-        post.title
-      }</h3> 
-                                 <p id="body-${post.postId}">${post.body}</p>  
-                                 <img id="img-${post.postId}" src="${
-        post.imgUrl
-      }">
-                                 
-                                 <div class="posts__post-comments">
-                                 </div>
-                                </div>
-                                <div class = "post-icons">
-                                <div><img name="${user.id}" id="${
-        post.postId
-      }" class="posts__post-likes-heart" src="${
-        post.likes == 0 ? "./images/like.svg" : "./images/liked.svg"
-      }">
-                                </img><span id="heart-count-${
-                                  post.postId
-                                }" class="posts__post-likes">${
-        post.likes
-      }</span>
-                                <img name="${user.id}" id="${
-        post.postId
-      }"  class="posts__post-comments" src ="./images/comments.svg">
-                                </img>
-                                </div><div>
-                               </div></div>`;
-    });
+    postRenderer(timeline, user, user.posts);
   });
-  let postIcons = document.getElementsByClassName(" post-icons")[0];
+  let postIcons = document.getElementsByClassName("post-icons")[0];
   // event handler for post wrapper
   console.log(postIcons);
   postIcons.addEventListener("click", (e) => {
@@ -473,6 +394,61 @@ async function getTimelinePosts() {
   });
 }
 
+async function renderPosts() {
+  let posts = await getData("posts");
+  postsContent.innerHTML = "";
+  postRenderer(postsContent, userObject, posts, "currUserPosts");
+}
+
+function postRenderer(element, user, posts, type) {
+  posts.forEach((post) => {
+    element.innerHTML += `<div class="posts__post-wrapper">
+    <img class="userpic" src="${user.userPic}">
+    <span class="posts__post-name">${
+      user.name
+    }</span> <span class="posts__post-username">@${
+      user.username
+    }</span><span class="posts__post-date">&nbsp${post.postDate}</span>
+                                 <h3 id="title-${post.postId}">${
+      post.title
+    }</h3> 
+                                 <p id="body-${post.postId}">${post.body}</p>  
+                                 <img id="img-${post.postId}" src="${
+      post.imgUrl
+    }">
+                                 
+                                 <div class="posts__post-comments">
+                                 </div>
+                                </div>
+                                <div class = "post-icons">
+                                <div><img name="${user.id}" id="${
+      post.postId
+    }" class="posts__post-likes-heart" src="${
+      post.likes == 0 ? "./images/like.svg" : "./images/liked.svg"
+    }">
+                                </img><span id="heart-count-${
+                                  post.postId
+                                }" class="posts__post-likes">${
+      post.likes
+    }</span>
+                                <img name="${user.id}" id="${
+      post.postId
+    }"  class="posts__post-comments" src ="./images/comments.svg">
+                                </img>
+                                </div><div class="edit-delete-btns ${
+                                  type && type === "currUserPosts" ? "" : "hide"
+                                }"><img src="./images/delete.svg" id ="${
+      post.postId
+    }" class="posts__post-delete">
+                                </img>
+                                <img src = "./images/edit.svg" id ="${
+                                  post.postId
+                                }" class="posts__post-edit">
+                                </img>
+                               </div></div>`;
+  });
+}
+
 async function postComments(data, uId, postId) {
   let posts = await getData("userPosts", userId);
 
@@ -493,7 +469,6 @@ async function postComments(data, uId, postId) {
   console.log(posts);
 }
 
-getTimelinePosts();
 // get data from JSON server
 async function getData(type, id) {
   if (type === "users") {
@@ -553,7 +528,7 @@ async function setData(type, data, id) {
       body: JSON.stringify({ posts: posts }),
     };
     await fetch(`${API}/${userId}`, options);
-    renderPosts();
+    await renderPosts();
   }
 }
 
