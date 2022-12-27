@@ -7,6 +7,7 @@ let userName;
 let userlName;
 let userHandle;
 let userPic;
+let loginState = getLogIn();
 function getDate() {
   let date = new Date();
   let buildDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
@@ -67,6 +68,8 @@ let createMsg = document.getElementsByClassName("first-sreen__create-msg")[0];
 let sidebarExplore = document.getElementsByClassName("explore")[0];
 
 let home = document.getElementsByClassName("home")[0];
+let joined = document.getElementsByClassName("profile__joined")[0];
+
 //show profile
 
 const profileIcon = document.getElementsByClassName("profile-icon")[0];
@@ -76,10 +79,16 @@ const postForm = document.getElementsByClassName("posts")[0];
 // const exploreIcon = document.getElementsByClassName("explore-icon")[0];
 
 // get profile elements
-let profileTopName = document.getElementsByClassName("posts")[0];
-let tweetCount = document.getElementsByClassName("posts")[0];
-let profileBottomHandle = document.getElementsByClassName("posts")[0];
-let profilebottomName = document.getElementsByClassName("posts")[0];
+let profileTopName = document.getElementsByClassName("profile-handle")[0];
+let tweetCount = document.getElementsByClassName("profile-quantity")[0];
+let profileBottomHandle = document.getElementsByClassName("profile__handle")[0];
+let profileBottomName = document.getElementsByClassName("profile__name")[0];
+
+async function countPosts() {
+  let countPosts = await getData("posts", userId);
+  let postCount = countPosts.length;
+  return postCount;
+}
 
 home.addEventListener("click", () => {
   profileForm.classList.add("hide");
@@ -97,6 +106,12 @@ let timeline = document.getElementsByClassName("timeline-wrapper")[0];
 console.log(timeline);
 
 let timelineContainer = document.getElementsByClassName("timeline")[0];
+let logOut = document.getElementsByClassName("profile__logout")[0];
+
+logOut.addEventListener("click", () => {
+  setLogIn(false);
+  location.reload();
+});
 
 let posts = document.getElementsByClassName("posts")[0];
 
@@ -186,8 +201,9 @@ async function createNewUser() {
     password: inpPassCreate.value,
     userPic: "./images/userPic.png",
     posts: [],
-    loggedin: false,
+    dateJoined: getDate(),
   };
+
   console.log("newest ", newUser);
   await setData("user", newUser);
   createMsg.innerText =
@@ -239,6 +255,19 @@ async function deleteData(type, id) {
   }
 }
 
+function setLogIn(state, id) {
+  if (state === true) {
+    localStorage.setItem("login", JSON.stringify({ state: true, userId: id }));
+  } else {
+    localStorage.setItem("login", "false");
+  }
+}
+
+function getLogIn() {
+  let state = JSON.parse(localStorage.getItem("login"));
+  return state;
+}
+
 // login existing user
 async function loginUser() {
   let users = await getData("users");
@@ -248,17 +277,23 @@ async function loginUser() {
       inpUserLogin.value === users[i].username &&
       inpPassLogin.value === users[i].password
     ) {
+      isUserAuthenticated = true;
+      console.log("Login successful");
       userId = users[i].id;
       userName = users[i].name;
       userlName = users[i].lastName;
       userHandle = users[i].username;
       userPic = users[i].userPic;
-      isUserAuthenticated == true;
-      console.log("Login successful");
+
       loginModal.classList.add("hide");
       container.classList.remove("hide");
       welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
-      console.log(users[i]);
+      tweetCount.innerText = `Tweets: ${await countPosts()}`;
+      profileTopName.innerText = userName;
+      profileBottomHandle.innerText = userHandle;
+      profileBottomName.innerText = `${userName} ${userlName}`;
+      joined.innerText = "Date joined " + users[i].dateJoined;
+      setLogIn(true, users[i].id);
       renderPosts();
       break;
     }
@@ -268,8 +303,38 @@ async function loginUser() {
     inpPassLogin.style.borderColor = "red";
     inpUserLogin.style.borderColor = "red";
     inpPassLogin.value = "";
+    setLogIn(false);
   }
 }
+
+async function checkLogin() {
+  if (loginState.state === true) {
+    loginModal.classList.add("hide");
+    let users = await getData("users");
+    for (let i = 0; i < users.length; i++) {
+      if (loginState.userId === users[i].id) {
+        console.log("Login successful");
+        userId = users[i].id;
+        userName = users[i].name;
+        userlName = users[i].lastName;
+        userHandle = users[i].username;
+        userPic = users[i].userPic;
+
+        container.classList.remove("hide");
+        welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
+        tweetCount.innerText = `Tweets: ${await countPosts()}`;
+        profileTopName.innerText = userName;
+        profileBottomHandle.innerText = userHandle;
+        profileBottomName.innerText = `${userName} ${userlName}`;
+        joined.innerText = "Date joined " + users[i].dateJoined;
+        renderPosts();
+        break;
+      }
+    }
+  }
+}
+
+checkLogin();
 
 // render posts
 
@@ -350,7 +415,7 @@ async function getTimelinePosts() {
       user.name
     }</span> <span class="posts__post-username">@${
         user.username
-      }</span><span class="posts__post-date">${post.postDate}</span>
+      }</span><span class="posts__post-date">&nbsp${post.postDate}</span>
                                  <h3 id="title-${post.postId}">${
         post.title
       }</h3> 
@@ -373,12 +438,59 @@ async function getTimelinePosts() {
                                 }" class="posts__post-likes">${
         post.likes
       }</span>
-                                <img class="posts__post-comments" src ="./images/comments.svg">
+                                <img name="${user.id}" id="${
+        post.postId
+      }"  class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
                                 </div><div>
                                </div></div>`;
     });
   });
+  let postIcons = document.getElementsByClassName(" post-icons")[0];
+  // event handler for post wrapper
+  console.log(postIcons);
+  postIcons.addEventListener("click", (e) => {
+    console.log("click");
+    if (e.target.classList.contains("posts__post-comments")) {
+      console.log(true);
+      let commentWrapper = document.createElement("div");
+      let comment = document.createElement("input");
+      let addCommentBtn = document.createElement("button");
+      postIcons.append(commentWrapper);
+      commentWrapper.append(comment);
+      commentWrapper.append(addCommentBtn);
+      addCommentBtn.innerText = "Add comment";
+      let commentObj = {
+        author: userName,
+        authorId: userId,
+        commentBody: comment.value,
+        timeCreated: getDate(),
+      };
+      addCommentBtn.addEventListener("click", () => {
+        postComments(commentObj, e.target.name, e.target.id);
+      });
+    }
+  });
+}
+
+async function postComments(data, uId, postId) {
+  let posts = await getData("userPosts", userId);
+
+  posts.forEach((post) => {
+    if (postId === post.id) {
+      post.comments.push(data);
+    }
+  });
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ posts: posts }),
+  };
+  await fetch(`${API}/${uId}`, options);
+  getTimelinePosts();
+  console.log(posts);
 }
 
 getTimelinePosts();
