@@ -19,8 +19,7 @@ body {
 }
 
 .posts {
-  margin: auto;
-  width: 400px;
+  width: 50%;
 }
 
 .sidebar {
@@ -393,7 +392,8 @@ body {
 }
 
 .posts__wrapper {
-  width: 50%;
+  margin: auto;
+  width: 400px;
 }
 
 .timeline-wrapper {
