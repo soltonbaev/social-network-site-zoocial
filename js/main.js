@@ -32,6 +32,12 @@ let inpLastName = document.getElementsByClassName(
 let container = document.getElementsByClassName("container")[0];
 
 let editModal = document.getElementsByClassName("posts__modal-edit")[0];
+let modalUpdateBtn = document.getElementsByClassName(
+  "posts__edit-btn-update"
+)[0];
+let modalUpdateTitle = document.getElementsByClassName("posts__edit-title")[0];
+let modalUpdateBody = document.getElementsByClassName("posts__edit-body")[0];
+let modalUpdateImg = document.getElementsByClassName("posts__edit-img")[0];
 
 // grab 'ADD POST' inputs
 
@@ -60,11 +66,15 @@ postsContent.addEventListener("click", async function (e) {
   if (e.target.classList.contains("posts__post-delete")) {
     console.log(e.target.id);
     await deleteData("post", parseInt(e.target.id));
-  } else if (e.target.classList.contains("posts__post-edit")) {
-    console.log(editModal);
-    editModal.classList.remove("hide");
   }
+  // else if (e.target.classList.contains("posts__post-edit")) {
+  //   console.log(editModal);
+  //   // editModal.classList.remove("hide");
+  //   // modalUpdateTitle.value =
+  // }
 });
+
+modalUpdateBtn.addEventListener("click", () => {});
 
 // create new user
 async function createNewUser() {
@@ -171,11 +181,13 @@ async function renderPosts() {
                                 </div>
                                 <button id ="${post.postId}" class="posts__post-delete">Delete Post</button><button id ="${post.postId}" class="posts__post-edit">Edit Post</button>`;
     // let postDelete = document.getElementsByClassName("posts__post-delete")[0];
-    // let postEdit = document.getElementsByClassName("posts__post-edit")[0];
-    // postDelete.addEventListener("click", async function () {
-    //   console.log(post.postId);
-    //
-    // });
+    let postEdit = document.getElementsById(post.postId);
+    postEdit.addEventListener("click", async function () {
+      editModal.classList.remove("hide");
+      modalUpdateTitle.value = post.title;
+      modalUpdateBody.value = post.body;
+      modalUpdateUrl.value = post.url;
+    });
   });
 
   console.log(posts);
