@@ -1,3 +1,14 @@
 .hide {
-  display: none;
+  display: none !important;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sidebar,
+.posts,
+.news {
+  width: 400px;
 }

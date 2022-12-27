@@ -38,6 +38,8 @@ let postBody = document.getElementsByClassName("posts__body")[0];
 let postImg = document.getElementsByClassName("posts__img")[0];
 let postBtnAdd = document.getElementsByClassName("posts__btn-add")[0];
 let postsContent = document.getElementsByClassName("posts__content")[0];
+
+let createMsg = document.getElementsByClassName("first-sreen__create-msg")[0];
 // listeners
 btnLogin.addEventListener("click", async function () {
   await loginUser();
@@ -53,7 +55,7 @@ postBtnAdd.addEventListener("click", async function () {
 
 // create new user
 async function createNewUser() {
-  users = await getData();
+  users = await getData("users");
   users.forEach((user) => {
     if (inpUserCreate.value === user.username) {
       inpUserCreate.value = "username is taken";
@@ -71,6 +73,9 @@ async function createNewUser() {
     loggedin: false,
   };
   await setData("user", newUser);
+  createMsg.innerText =
+    "You account has been successfuly created. Use your credentials to login";
+  createMsg.style.color = "green";
 }
 
 async function createNewPost() {
