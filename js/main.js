@@ -6,6 +6,16 @@ let userId = null;
 let userName;
 let userHandle;
 let userPic;
+function getDate() {
+  let date = new Date();
+  let buildDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
+  return buildDate;
+}
+
+// console.log(getDate());
+
+// the hour in UTC+0 time zone (London time without daylight savings)
+
 console.log("global userpic", userPic);
 //! ===========================================GRAB ELEMENTS=======================================
 // grab login elements
@@ -52,6 +62,18 @@ let postBtnAdd = document.getElementsByClassName("posts__btn-add")[0];
 let postsContent = document.getElementsByClassName("posts__content")[0];
 
 let createMsg = document.getElementsByClassName("first-sreen__create-msg")[0];
+
+let sidebarExplore = document.getElementsByClassName("explore")[0];
+
+let timeline = document.getElementsByClassName("timeline")[0];
+console.log(timeline);
+
+let posts = document.getElementsByClassName("posts")[0];
+sidebarExplore.addEventListener("click", () => {
+  posts.classList.add("hide");
+  timeline.classList.remove("hide");
+});
+
 // listeners
 btnLogin.addEventListener("click", async function () {
   await loginUser();
@@ -63,6 +85,21 @@ btnCreate.addEventListener("click", async function () {
 postBtnAdd.addEventListener("click", async function () {
   await createNewPost();
   await renderPosts();
+});
+
+//event deletagion for timeline
+
+timeline.addEventListener("click", async function (e) {
+  if (e.target.classList.contains("posts__post-likes-heart")) {
+    let heartCount = document.getElementById(`heart-count-${e.target.id}`);
+    console.log(heartCount.innerText);
+    let newHeartCount = parseInt(heartCount.innerText) + 1;
+    await setGlobalLikes(
+      newHeartCount,
+      parseInt(e.target.id),
+      parseInt(e.target.name)
+    );
+  }
 });
 
 // event delegation for delete and edit of posts
@@ -128,13 +165,16 @@ async function createNewUser() {
 
 async function createNewPost() {
   console.log(postImg);
+  let postImage = postImg.value;
+  if (postImg.value === "") {
+    postImage = "https://picsum.photos/300/300";
+  }
   const newPostObj = {
     title: postTitle.value,
     body: postBody.value,
-    imgUrl: `${
-      postImg.value === "" ? "https://picsum.photos/300/300" : postImg.value
-    }`,
+    imgUrl: postImage,
     postId: Date.now(),
+    postDate: getDate(),
     likes: 0,
     comments: [],
     sharedby: [],
@@ -204,16 +244,15 @@ async function renderPosts() {
   let posts = await getData("posts");
   postsContent.innerHTML = "";
   posts.forEach((post) => {
-    console.log(post.userPic);
     postsContent.innerHTML += `<div class="posts__post-wrapper">
-    <img class="userpic" src="${userPic}"><span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span>
+    <img class="userpic" src="${userPic}"><span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span> <span class="posts__post-date">${post.postDate}</span>
                                  <h3 id="title-${post.postId}">${post.title}</h3> 
                                  <p id="body-${post.postId}">${post.body}</p>  
-                                 <img id="img-${post.postId}" src="${post.url}">
-                                 <span class="posts__post-likes">${post.likes}</span>
+                                 <img id="img-${post.postId}" src="${post.imgUrl}">
+                                 <span id="heart-count-${post.postId}" class="posts__post-likes">${post.likes}</span>
                                  <div class="posts__post-comments"></div>
                                 </div>
-                                <div class = "post-icons"><div><img class="posts__post-likes" src ="./images/like.svg">
+                                <div class = "post-icons"><div><img id="${post.postId}" class="posts__post-likes-heart" src ="./images/like.svg">
                                 </img>
                                 <img class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
@@ -221,25 +260,67 @@ async function renderPosts() {
                                 </img>
                                 <img src = "./images/edit.svg" id ="${post.postId}" class="posts__post-edit">
                                 </img></div></div>`;
-    // let postDelete = document.getElementsByClassName("posts__post-delete")[0];
-    // let postEdit = document.getElementById("edit-" + post.postId);
-    // console.log(postEdit);
-    // postEdit.addEventListener("click", async function () {
-    //   console.log(true);
-    // });
   });
-
-  console.log(posts);
 }
 
+async function setGlobalLikes(data, id, uId) {
+  let posts = await getData("userPosts", uId);
+  console.log(posts);
+  posts.forEach((post) => {
+    if (post.postId === id) {
+      post.likes = data;
+    }
+    return;
+  });
+
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ posts: posts }),
+  };
+  await fetch(`${API}/${uId}`, options);
+  getTimelinePosts();
+}
+
+async function getTimelinePosts() {
+  console.log("rendering timeline");
+  let users = await getData("users");
+  timeline.innerHTML = "";
+  users.forEach((user) => {
+    user.posts.forEach((post) => {
+      timeline.innerHTML += `<div class="posts__post-wrapper">
+    <img class="userpic" src="${user.userPic}"><span class="posts__post-name">${user.name}</span> <span class="posts__post-username">@${user.username}</span><span class="posts__post-date">${post.postDate}</span>
+                                 <h3 id="title-${post.postId}">${post.title}</h3> 
+                                 <p id="body-${post.postId}">${post.body}</p>  
+                                 <img id="img-${post.postId}" src="${post.imgUrl}">
+                                 <span id="heart-count-${post.postId}" class="posts__post-likes">${post.likes}</span>
+                                 <div class="posts__post-comments"></div>
+                                </div>
+                                <div class = "post-icons"><div><img name="${user.id}" id="${post.postId}" class="posts__post-likes-heart" src ="./images/like.svg">
+                                </img>
+                                <img class="posts__post-comments" src ="./images/comments.svg">
+                                </img>
+                                </div><div>
+                               </div></div>`;
+    });
+  });
+}
+
+getTimelinePosts();
 // get data from JSON server
-async function getData(type) {
+async function getData(type, id) {
   if (type === "users") {
     const response = await fetch(API);
     const result = await response.json();
     return result;
   } else if (type === "posts") {
     const response = await fetch(`${API}/${userId}`);
+    const result = await response.json();
+    return result.posts;
+  } else if (type === "userPosts" && id) {
+    const response = await fetch(`${API}/${id}`);
     const result = await response.json();
     return result.posts;
   }
@@ -300,9 +381,9 @@ async function test() {
 
 // remove all data from JSON server
 async function nukeAll() {
-  let users = await getData();
+  let users = await getData("users");
   users.forEach((user) => {
-    deleteData(user.id);
+    deleteData("user", user.id);
   });
 }
 
