@@ -68,6 +68,8 @@ let createMsg = document.getElementsByClassName("first-sreen__create-msg")[0];
 let sidebarExplore = document.getElementsByClassName("explore")[0];
 
 let home = document.getElementsByClassName("home")[0];
+let joined = document.getElementsByClassName("profile__joined")[0];
+
 //show profile
 
 const profileIcon = document.getElementsByClassName("profile-icon")[0];
@@ -286,10 +288,11 @@ async function loginUser() {
       loginModal.classList.add("hide");
       container.classList.remove("hide");
       welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
-      tweetCount.innerText = await countPosts();
+      tweetCount.innerText = `Tweets: ${await countPosts()}`;
       profileTopName.innerText = userName;
       profileBottomHandle.innerText = userHandle;
       profileBottomName.innerText = `${userName} ${userlName}`;
+      joined.innerText = "Date joined " + users[i].dateJoined;
       setLogIn(true, users[i].id);
       renderPosts();
       break;
@@ -319,10 +322,11 @@ async function checkLogin() {
 
         container.classList.remove("hide");
         welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
-        tweetCount.innerText = await countPosts();
+        tweetCount.innerText = `Tweets: ${await countPosts()}`;
         profileTopName.innerText = userName;
         profileBottomHandle.innerText = userHandle;
         profileBottomName.innerText = `${userName} ${userlName}`;
+        joined.innerText = "Date joined " + users[i].dateJoined;
         renderPosts();
         break;
       }
@@ -411,7 +415,7 @@ async function getTimelinePosts() {
       user.name
     }</span> <span class="posts__post-username">@${
         user.username
-      }</span><span class="posts__post-date">${post.postDate}</span>
+      }</span><span class="posts__post-date">&nbsp${post.postDate}</span>
                                  <h3 id="title-${post.postId}">${
         post.title
       }</h3> 
@@ -434,12 +438,59 @@ async function getTimelinePosts() {
                                 }" class="posts__post-likes">${
         post.likes
       }</span>
-                                <img class="posts__post-comments" src ="./images/comments.svg">
+                                <img name="${user.id}" id="${
+        post.postId
+      }"  class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
                                 </div><div>
                                </div></div>`;
     });
   });
+  let postIcons = document.getElementsByClassName(" post-icons")[0];
+  // event handler for post wrapper
+  console.log(postIcons);
+  postIcons.addEventListener("click", (e) => {
+    console.log("click");
+    if (e.target.classList.contains("posts__post-comments")) {
+      console.log(true);
+      let commentWrapper = document.createElement("div");
+      let comment = document.createElement("input");
+      let addCommentBtn = document.createElement("button");
+      postIcons.append(commentWrapper);
+      commentWrapper.append(comment);
+      commentWrapper.append(addCommentBtn);
+      addCommentBtn.innerText = "Add comment";
+      let commentObj = {
+        author: userName,
+        authorId: userId,
+        commentBody: comment.value,
+        timeCreated: getDate(),
+      };
+      addCommentBtn.addEventListener("click", () => {
+        postComments(commentObj, e.target.name, e.target.id);
+      });
+    }
+  });
+}
+
+async function postComments(data, uId, postId) {
+  let posts = await getData("userPosts", userId);
+
+  posts.forEach((post) => {
+    if (postId === post.id) {
+      post.comments.push(data);
+    }
+  });
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ posts: posts }),
+  };
+  await fetch(`${API}/${uId}`, options);
+  getTimelinePosts();
+  console.log(posts);
 }
 
 getTimelinePosts();
