@@ -31,6 +31,8 @@ let inpLastName = document.getElementsByClassName(
 )[0];
 let container = document.getElementsByClassName("container")[0];
 
+let editModal = document.getElementsByClassName("posts__modal-edit")[0];
+
 // grab 'ADD POST' inputs
 
 let postTitle = document.getElementsByClassName("posts__title")[0];
@@ -51,6 +53,17 @@ btnCreate.addEventListener("click", async function () {
 postBtnAdd.addEventListener("click", async function () {
   await createNewPost();
   await renderPosts();
+});
+
+// event delegation for delete and edit of posts
+postsContent.addEventListener("click", async function (e) {
+  if (e.target.classList.contains("posts__post-delete")) {
+    console.log(e.target.id);
+    await deleteData("post", parseInt(e.target.id));
+  } else if (e.target.classList.contains("posts__post-edit")) {
+    console.log(editModal);
+    editModal.classList.remove("hide");
+  }
 });
 
 // create new user
@@ -98,7 +111,7 @@ async function deleteData(type, id) {
     let posts = await getData("posts");
 
     // console.log(type);
-    // console.log(id);
+    console.log(id);
     posts.forEach((post, index) => {
       if (post.postId === id) {
         posts.splice(index, 1);
@@ -112,8 +125,8 @@ async function deleteData(type, id) {
       body: JSON.stringify({ posts: posts }),
     };
     await fetch(`${API}/${userId}`, options);
+    renderPosts();
   }
-  renderPosts();
 }
 
 // login existing user
@@ -156,13 +169,13 @@ async function renderPosts() {
                                  <span class="posts__post-likes">${post.likes}</span>
                                  <div class="posts__post-comments"></div>
                                 </div>
-                                <button class="posts__post-delete">Delete Post</button><button class="posts__post-edit">Edit Post</button>`;
-    let postDelete = document.getElementsByClassName("posts__post-delete")[0];
-    let postEdit = document.getElementsByClassName("posts__post-edit")[0];
-    postDelete.addEventListener("click", async function () {
-      console.log(post.postId);
-      await deleteData("post", post.postId);
-    });
+                                <button id ="${post.postId}" class="posts__post-delete">Delete Post</button><button id ="${post.postId}" class="posts__post-edit">Edit Post</button>`;
+    // let postDelete = document.getElementsByClassName("posts__post-delete")[0];
+    // let postEdit = document.getElementsByClassName("posts__post-edit")[0];
+    // postDelete.addEventListener("click", async function () {
+    //   console.log(post.postId);
+    //
+    // });
   });
 
   console.log(posts);
