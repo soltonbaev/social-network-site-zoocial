@@ -70,10 +70,10 @@
           <li class="sidebar-items mt-0">
             <img class="sidebar-icons" src="./images/Home.svg" />Home
           </li>
-          <li class="sidebar-items">
+          <li class="sidebar-items explore-icon">
             <img class="sidebar-icons" src="./images/explore.svg" />Explore
           </li>
-          <li class="sidebar-items">
+          <li class="sidebar-items profile-icon">
             <img class="sidebar-icons" src="./images/profile.svg" />Profile
           </li>
         </ul>
@@ -102,22 +102,51 @@
           <button class="posts__btn-add">Tweet</button>
         </div>
         <div class="posts__modal-edit hide">
+          <h2>Edit your tweet</h2>
           <input
-            class="posts__edit-title"
+            class="posts__edit-title edit-inp"
             placeholder="edit post title"
             type="text"
           /><input
-            class="posts__edit-body"
+            class="posts__edit-body edit-inp"
             placeholder="edit post body"
             type="text"
           /><input
-            class="posts__edit-img"
+            class="posts__edit-img edit-inp"
             placeholder="edit post url"
             type="text"
           />
           <button class="posts__edit-btn-update">Update</button>
         </div>
         <div class="posts__content"></div>
+      </div>
+      <div class="profile hide">
+        <div class="profile-lineHeight">
+          <span class="profile-handle">KENCIK</span>
+          <p class="profile-quantity">208 tweets</p>
+        </div>
+        <div>
+          <img
+            class="profile__background-img"
+            src="./images/profile.jpeg"
+            alt=""
+          />
+          <img class="profile__profile-img" src="./images/round.png" alt="" />
+        </div>
+        <div class="profile-names">
+          <p>Kencik</p>
+          <p>@kencik16</p>
+        </div>
+        <div class="display-flex">
+          <div class="osh">
+            <img src="./images/info.svg" alt="" />
+            <p>Osh</p>
+          </div>
+          <div class="osh ml-10">
+            <img src="./images/calendar.svg" alt="" />
+            <p>Joined October 2021</p>
+          </div>
+        </div>
       </div>
       <div class="right-sidebar">
         <div class="search">

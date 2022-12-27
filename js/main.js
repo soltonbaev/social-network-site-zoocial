@@ -63,6 +63,8 @@ btnCreate.addEventListener("click", async function () {
 postBtnAdd.addEventListener("click", async function () {
   await createNewPost();
   await renderPosts();
+  postTitle.value = "";
+  postBody.value = "";
 });
 
 // event delegation for delete and edit of posts
@@ -213,7 +215,7 @@ async function renderPosts() {
                                  <span class="posts__post-likes">${post.likes}</span>
                                  <div class="posts__post-comments"></div>
                                 </div>
-                                <div class = "post-icons"><div><img class="posts__post-likes" src ="./images/like.svg">
+                                <div class = "post-icons"><div><img class="posts__post-liked" src ="./images/liked.svg"></img><img class="posts__post-likes" src ="./images/like.svg">
                                 </img>
                                 <img class="posts__post-comments" src ="./images/comments.svg">
                                 </img>
@@ -325,4 +327,22 @@ login.addEventListener("click", (e) => {
   loginForm.classList.add("display-block");
   loginForm.classList.remove("display-none");
   regisForm.classList.remove("display-flex");
+});
+
+//show profile
+
+const profileIcon = document.getElementsByClassName("profile-icon")[0];
+const profileForm = document.getElementsByClassName("profile")[0];
+
+const postForm = document.getElementsByClassName("posts")[0];
+const exploreIcon = document.getElementsByClassName("explore-icon")[0];
+
+profileIcon.addEventListener("click", () => {
+  profileForm.classList.remove("hide");
+  postForm.classList.add("hide");
+});
+
+exploreIcon.addEventListener("click", () => {
+  profileForm.classList.add("hide");
+  postForm.classList.remove("hide");
 });
