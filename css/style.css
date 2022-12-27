@@ -114,10 +114,13 @@ body {
 
 /* sidebar css */
 .logo {
-  width: 150px;
-  height: 90px;
+  width: 250px;
+  height: 120px;
 }
 
+ul:hover {
+  cursor: pointer;
+}
 .sidebar__wrapper {
   position: -webkit-sticky;
   position: sticky;
@@ -129,13 +132,21 @@ body {
   justify-content: space-between;
 }
 
+.sidebar__wrapper-icons {
+  width: 70px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .sidebar-items {
   margin-top: 40px;
 }
 
 .sidebar-icons {
   /* position: absolute; */
-  left: 70px;
+  /* left: 70px; */
 }
 
 .tweet-inp {
