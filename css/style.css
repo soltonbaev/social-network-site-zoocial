@@ -1,3 +1,12 @@
+/* main font  */
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap");
+
+body {
+  color: #e7e9ea;
+  background-color: #15202b;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
 .hide {
   display: none !important;
 }
@@ -11,4 +20,117 @@
 .posts,
 .news {
   width: 400px;
+}
+
+.first-screen__login-wrapper {
+  margin-top: 10%;
+  margin-left: 38%;
+}
+
+.first-screen__headers {
+  display: flex;
+  color: #e7e9ea;
+  cursor: pointer;
+}
+
+.regis {
+  margin-left: 40px;
+}
+
+.first-screen__inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* инпуты логина */
+.first-screen__login-user {
+  width: 270px;
+  height: 40px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+.first-screen__login-pass {
+  width: 270px;
+  height: 40px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+.first-screen__login-btn {
+  width: 270px;
+  background-color: #1d9bf0;
+  color: #ffffff;
+  height: 40px;
+  width: 295px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.first-screen__create {
+  display: none;
+}
+
+/* create styling */
+.first-screen__create {
+  display: none;
+  margin-top: 10%;
+  margin-left: 38%;
+  flex-direction: column;
+}
+
+.create-inp {
+  width: 270px;
+  height: 40px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+.create-btn {
+  width: 270px;
+  background-color: #1d9bf0;
+  color: #ffffff;
+  height: 40px;
+  width: 295px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.sidebar__wrapper {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-items {
+  margin-top: 40px;
+}
+
+.sidebar-icons {
+  position: absolute;
+  left: 20px;
+}
+
+/* custom classes */
+.display-block {
+  display: block;
+}
+.display-none {
+  display: none;
+}
+.display-flex {
+  display: flex;
 }

@@ -10,57 +10,80 @@
   <body>
     <div class="first-screen">
       <div class="first-screen__login-wrapper">
-        <h2 class="first-screen__heading heading">Login to your account</h2>
-        <input
-          class="first-screen__login-user"
-          type="text"
-          placeholder="username"
-        />
-        <input
-          class="first-screen__login-pass heading"
-          type="password"
-          placeholder="password"
-        />
-        <button class="first-screen__login-btn">Login</button>
+        <div class="first-screen__headers">
+          <h2 class="first-screen__heading login">Login</h2>
+          <h2 class="first-screen__heading regis">Registration</h2>
+        </div>
+        <div class="first-screen__inputs">
+          <input
+            class="first-screen__login-user"
+            type="text"
+            placeholder="username"
+          />
+          <input
+            class="first-screen__login-pass heading"
+            type="password"
+            placeholder="password"
+          />
+          <button class="first-screen__login-btn">Login</button>
+        </div>
       </div>
       <div class="first-screen__create">
-        <h2 class="first-screen__heading">Create new account</h2>
+        <div class="first-screen__headers">
+          <h2 class="first-screen__heading login">Login</h2>
+          <h2 class="first-screen__heading regis">Registration</h2>
+        </div>
         <input
-          class="first-screen__create-name"
+          class="first-screen__create-name create-inp"
           type="text"
           placeholder="First Name"
         />
         <input
-          class="first-screen__create-lname"
+          class="first-screen__create-name create-inp"
           type="text"
           placeholder="Last Name"
         />
         <input
-          class="first-screen__create-email"
+          class="first-screen__create-email create-inp"
           type="email"
           placeholder="email"
         />
         <input
-          class="first-screen__create-user"
+          class="first-screen__create-user create-inp"
           type="text"
           placeholder="username"
         />
 
         <input
-          class="first-screen__create-pass"
+          class="first-screen__create-pass create-inp"
           type="password"
           placeholder="create a password"
         />
-        <button class="first-screen__create-btn">Create</button>
+        <button class="first-screen__create-btn create-btn">Create</button>
         <span class="first-sreen__create-msg"></span>
       </div>
     </div>
     <div class="container hide">
       <div class="sidebar">
         <ul class="sidebar__wrapper">
-          <li>My posts</li>
-          <li>Timeline</li>
-          <li>My account</li>
+          <li class="sidebar-items">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/Home.svg"
+            />Home
+          </li>
+          <li class="sidebar-items">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/explore.svg"
+            />Explore
+          </li>
+          <li class="sidebar-items">
+            <img
+              class="sidebar-icons"
+              src="/HACKATHON-DOM-JS/images/profile.svg"
+            />Profile
+          </li>
         </ul>
       </div>
       <div class="posts">
