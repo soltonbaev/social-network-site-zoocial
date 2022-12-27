@@ -3,6 +3,8 @@
 const API = "https://sltnbv-json-server.herokuapp.com/hackathon-dom-js";
 
 let userId = null;
+let userName;
+let userHandle;
 //! ===========================================GRAB ELEMENTS=======================================
 // grab login elements
 let inpUserLogin = document.getElementsByClassName(
@@ -123,7 +125,9 @@ async function createNewPost() {
   const newPostObj = {
     title: postTitle.value,
     body: postBody.value,
-    imgUrl: postImg.value,
+    imgUrl: `${
+      postImg.value === "" ? "https://picsum.photos/300/300" : postImg.value
+    }`,
     postId: Date.now(),
     likes: 0,
     comments: [],
@@ -167,6 +171,8 @@ async function loginUser() {
       inpPassLogin.value === users[i].password
     ) {
       userId = users[i].id;
+      userName = users[i].name;
+      userHandle = users[i].username;
       isUserAuthenticated == true;
       console.log("Login successful");
       loginModal.classList.add("hide");
@@ -191,6 +197,7 @@ async function renderPosts() {
   postsContent.innerHTML = "";
   posts.forEach((post) => {
     postsContent.innerHTML += `<div class="posts__post-wrapper">
+    <span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span>
                                  <h3 id="title-${post.postId}">${post.title}</h3> 
                                  <p id="body-${post.postId}">${post.body}</p>  
                                  <img id="img-${post.postId}" src="${post.url}">
