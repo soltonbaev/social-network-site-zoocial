@@ -5,6 +5,8 @@ const API = "https://sltnbv-json-server.herokuapp.com/hackathon-dom-js";
 let userId = null;
 let userName;
 let userHandle;
+let userPic;
+console.log("global userpic", userPic);
 //! ===========================================GRAB ELEMENTS=======================================
 // grab login elements
 let inpUserLogin = document.getElementsByClassName(
@@ -106,15 +108,18 @@ async function createNewUser() {
       return;
     }
   });
+
   const newUser = {
     name: inpName.value,
     lastName: inpLastName.value,
     email: inpEmailCreate.value,
     username: inpUserCreate.value,
     password: inpPassCreate.value,
+    userPic: "./images/userPic.png",
     posts: [],
     loggedin: false,
   };
+  console.log("newest ", newUser);
   await setData("user", newUser);
   createMsg.innerText =
     "You account has been successfuly created. Use your credentials to login";
@@ -122,6 +127,7 @@ async function createNewUser() {
 }
 
 async function createNewPost() {
+  console.log(postImg);
   const newPostObj = {
     title: postTitle.value,
     body: postBody.value,
@@ -173,11 +179,13 @@ async function loginUser() {
       userId = users[i].id;
       userName = users[i].name;
       userHandle = users[i].username;
+      userPic = users[i].userPic;
       isUserAuthenticated == true;
       console.log("Login successful");
       loginModal.classList.add("hide");
       container.classList.remove("hide");
       welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${users[i].name}</h1>`;
+      console.log(users[i]);
       renderPosts();
       break;
     }
@@ -196,8 +204,9 @@ async function renderPosts() {
   let posts = await getData("posts");
   postsContent.innerHTML = "";
   posts.forEach((post) => {
+    console.log(post.userPic);
     postsContent.innerHTML += `<div class="posts__post-wrapper">
-    <span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span>
+    <img class="userpic" src="${userPic}"><span class="posts__post-name">${userName}</span> <span class="posts__post-username">@${userHandle}</span>
                                  <h3 id="title-${post.postId}">${post.title}</h3> 
                                  <p id="body-${post.postId}">${post.body}</p>  
                                  <img id="img-${post.postId}" src="${post.url}">
@@ -239,6 +248,7 @@ async function getData(type) {
 // write data to JSON server
 async function setData(type, data, id) {
   if (type === "user") {
+    console.log("newuser", data);
     const options = {
       method: "POST",
       headers: {
