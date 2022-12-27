@@ -67,61 +67,95 @@
       <div class="sidebar">
         <ul class="sidebar__wrapper">
           <img class="logo" src="./images/logo.jpeg" alt="" />
-          <li class="sidebar-items mt-0">
+          <li class="sidebar-items home mt-0">
             <img class="sidebar-icons" src="./images/Home.svg" />Home
           </li>
-          <li class="sidebar-items explore">
+          <li class="sidebar-items explore explore-icon">
             <img class="sidebar-icons" src="./images/explore.svg" />Explore
           </li>
-          <li class="sidebar-items">
+          <li class="sidebar-items profile-icon">
             <img class="sidebar-icons" src="./images/profile.svg" />Profile
           </li>
         </ul>
       </div>
       <div class="posts">
-        <div class="welcome">
-          <span class="welcome__msg"></span>
+        <div class="posts__wrapper">
+          <div class="welcome">
+            <span class="welcome__msg"></span>
+          </div>
+          <div class="posts__inputs">
+            <h2 class="posts__heading heading">What is on your mind?</h2>
+            <input
+              type="text"
+              class="posts__title tweet-inp"
+              placeholder="enter title"
+            />
+            <input
+              type="text"
+              class="posts__body tweet-inp"
+              placeholder="write a post here"
+            />
+            <input
+              type="url"
+              class="posts__img tweet-inp"
+              placeholder="enter image url"
+            />
+            <button class="posts__btn-add">Tweet</button>
+          </div>
+          <div class="posts__modal-edit hide">
+            <input
+              class="posts__edit-title"
+              placeholder="edit post title"
+              type="text"
+            /><input
+              class="posts__edit-body"
+              placeholder="edit post body"
+              type="text"
+            /><input
+              class="posts__edit-img"
+              placeholder="edit post url"
+              type="text"
+            />
+            <button class="posts__edit-btn-update">Update</button>
+          </div>
+          <div class="posts__content"></div>
         </div>
-        <div class="posts__inputs">
-          <h2 class="posts__heading heading">What is on your mind?</h2>
-          <input
-            type="text"
-            class="posts__title tweet-inp"
-            placeholder="enter title"
-          />
-          <input
-            type="text"
-            class="posts__body tweet-inp"
-            placeholder="write a post here"
-          />
-          <input
-            type="url"
-            class="posts__img tweet-inp"
-            placeholder="enter image url"
-          />
-          <button class="posts__btn-add">Tweet</button>
+      </div>
+
+      <div class="profile hide">
+        <div class="profile-lineHeight">
+          <span class="profile-handle">KENCIK</span>
+          <p class="profile-quantity">208 tweets</p>
         </div>
-        <div class="posts__modal-edit hide">
-          <input
-            class="posts__edit-title"
-            placeholder="edit post title"
-            type="text"
-          /><input
-            class="posts__edit-body"
-            placeholder="edit post body"
-            type="text"
-          /><input
-            class="posts__edit-img"
-            placeholder="edit post url"
-            type="text"
+        <div>
+          <img
+            class="profile__background-img"
+            src="./images/profile.jpeg"
+            alt=""
           />
-          <button class="posts__edit-btn-update">Update</button>
+          <img class="profile__profile-img" src="./images/round.png" alt="" />
         </div>
-        <div class="posts__content"></div>
+        <div class="profile-names">
+          <p>Kencik</p>
+          <p>@kencik16</p>
+        </div>
+        <div class="display-flex">
+          <div class="osh">
+            <img src="./images/info.svg" alt="" />
+            <p>Osh</p>
+          </div>
+          <div class="osh ml-10">
+            <img src="./images/calendar.svg" alt="" />
+            <p>Joined October 2021</p>
+          </div>
+        </div>
       </div>
       <div class="timeline hide">
-        <div class="timeline__posts"></div>
+        <div class="timeline-wrapper">
+          <div class="timeline__posts"></div>
+        </div>
       </div>
+
       <div class="right-sidebar">
         <div class="search">
           <img class="search-img" src="./images/search.svg" alt="" />

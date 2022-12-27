@@ -18,13 +18,13 @@ body {
   margin: 0 auto;
 }
 
-.posts,
-.news {
+.posts {
+  margin: auto;
   width: 400px;
 }
 
 .sidebar {
-  width: 250px;
+  width: 25%;
 }
 
 .first-screen__login-wrapper {
@@ -175,6 +175,7 @@ body {
 }
 
 .right-sidebar {
+  width: 25%;
   margin-left: 40px;
   margin-top: 30px;
 }
@@ -255,9 +256,16 @@ body {
 }
 
 .post-icons {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+}
+
+.posts__post-liked {
+  z-index: 1;
+  position: absolute;
+  display: none;
 }
 
 .posts__post-comments {
@@ -268,7 +276,91 @@ body {
   margin-right: 20px;
 }
 
-/* custom classes */
+/* modal */
+
+.posts__modal-edit {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #273340;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.edit-inp {
+  width: 250px;
+  padding-left: 30px;
+  color: #dee0e1;
+  border-radius: 8px;
+  height: 50px;
+  width: 285px;
+  border: #202327;
+  background-color: #1d9bf0;
+  outline: none;
+  margin-top: 30px;
+}
+
+.edit-inp::placeholder {
+  color: #e7e9ea;
+}
+
+.posts__edit-btn-update {
+  background-color: #1d9bf0;
+  color: #ffffff;
+  height: 50px;
+  width: 150px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.profile {
+  margin-top: 35px;
+}
+
+.profile-lineHeight {
+  line-height: 15px;
+}
+
+.profile-handle {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0;
+}
+
+.profile-quantity {
+  opacity: 0.5;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.profile__background-img {
+  width: 600px;
+}
+.profile__profile-img {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  z-index: 1;
+  left: 10px;
+  bottom: 50px;
+}
+
+.profile-names {
+  line-height: 10px;
+  margin-top: -90px;
+  margin-left: 500px;
+}
+
+.osh {
+  display: flex;
+  align-items: center;
+}
+
+/*! custom classes */
 .display-block {
   display: block;
 }
@@ -281,4 +373,34 @@ body {
 
 .userpic {
   width: 30px;
+  margin-bottom: -10px;
+  margin-right: 10px;
+}
+
+.ml-10 {
+  margin-left: 15px;
+}
+
+/*! hovers  */
+.first-screen__login-btn:hover {
+  background-color: #1d79b9;
+  transition: ease-in-out 0.2s;
+}
+
+.posts__edit-btn-update:hover {
+  background-color: #1d79b9;
+  transition: ease-in-out 0.2s;
+}
+
+.posts__wrapper {
+  width: 50%;
+}
+
+.timeline-wrapper {
+  width: 400px;
+  margin: auto;
+}
+
+.timeline {
+  width: 50%;
 }

@@ -65,13 +65,38 @@ let createMsg = document.getElementsByClassName("first-sreen__create-msg")[0];
 
 let sidebarExplore = document.getElementsByClassName("explore")[0];
 
-let timeline = document.getElementsByClassName("timeline")[0];
+let home = document.getElementsByClassName("home")[0];
+//show profile
+
+const profileIcon = document.getElementsByClassName("profile-icon")[0];
+const profileForm = document.getElementsByClassName("profile")[0];
+
+const postForm = document.getElementsByClassName("posts")[0];
+// const exploreIcon = document.getElementsByClassName("explore-icon")[0];
+
+home.addEventListener("click", () => {
+  profileForm.classList.add("hide");
+  postForm.classList.remove("hide");
+  timelineContainer.classList.add("hide");
+});
+
+profileIcon.addEventListener("click", () => {
+  profileForm.classList.remove("hide");
+  postForm.classList.add("hide");
+  timelineContainer.classList.add("hide");
+});
+
+let timeline = document.getElementsByClassName("timeline-wrapper")[0];
 console.log(timeline);
 
+let timelineContainer = document.getElementsByClassName("timeline")[0];
+
 let posts = document.getElementsByClassName("posts")[0];
+
 sidebarExplore.addEventListener("click", () => {
+  profileForm.classList.add("hide");
   posts.classList.add("hide");
-  timeline.classList.remove("hide");
+  timelineContainer.classList.remove("hide");
 });
 
 // listeners
@@ -407,3 +432,11 @@ login.addEventListener("click", (e) => {
   loginForm.classList.remove("display-none");
   regisForm.classList.remove("display-flex");
 });
+
+// console.log(exploreIcon);
+// exploreIcon.addEventListener("click", () => {
+//   console.log(profileForm);
+//   console.log(1);
+//   profileForm.classList.add("hide");
+//   postForm.classList.remove("hide");
+// });
