@@ -64,17 +64,33 @@ postBtnAdd.addEventListener("click", async function () {
 // event delegation for delete and edit of posts
 postsContent.addEventListener("click", async function (e) {
   if (e.target.classList.contains("posts__post-delete")) {
-    console.log(e.target.id);
-    await deleteData("post", parseInt(e.target.id));
-  }
-  // else if (e.target.classList.contains("posts__post-edit")) {
-  //   console.log(editModal);
-  //   // editModal.classList.remove("hide");
-  //   // modalUpdateTitle.value =
-  // }
-});
+    console.log(parseInt(e.target.id));
 
-modalUpdateBtn.addEventListener("click", () => {});
+    await deleteData("post", parseInt(e.target.id));
+  } else if (e.target.classList.contains("posts__post-edit")) {
+    console.log(true);
+    console.log(e.target.id);
+    let currPostTitle = document.getElementById("title-" + e.target.id);
+    console.log(currPostTitle);
+    let currPostBody = document.getElementById("body-" + e.target.id);
+    let currPostImg = document.getElementById("img-" + e.target.id);
+    editModal.classList.remove("hide");
+    modalUpdateTitle.value = currPostTitle.textContent;
+    modalUpdateBody.value = currPostBody.innerText;
+    modalUpdateImg.value = currPostImg.innerText;
+    let editedPostObj = {
+      title: modalUpdateTitle.value,
+      body: modalUpdateBody.value,
+      imgUrl: modalUpdateImg.value,
+    };
+    // editModal.classList.remove("hide");
+    // modalUpdateTitle.value =
+    modalUpdateBtn.addEventListener("click", async function () {
+      await setData("editedPost", editedPostObj, parseInt(e.target.id));
+      editModal.classList.add("hide");
+    });
+  }
+});
 
 // create new user
 async function createNewUser() {
@@ -173,21 +189,19 @@ async function renderPosts() {
   postsContent.innerHTML = "";
   posts.forEach((post) => {
     postsContent.innerHTML += `<div class="posts__post-wrapper">
-                                 <h3>${post.title}</h3> 
-                                 <p>${post.body}</p>  
-                                 <img src="${post.url}">
+                                 <h3 id="title-${post.postId}">${post.title}</h3> 
+                                 <p id="body-${post.postId}">${post.body}</p>  
+                                 <img id="img-${post.postId}" src="${post.url}">
                                  <span class="posts__post-likes">${post.likes}</span>
                                  <div class="posts__post-comments"></div>
                                 </div>
                                 <button id ="${post.postId}" class="posts__post-delete">Delete Post</button><button id ="${post.postId}" class="posts__post-edit">Edit Post</button>`;
     // let postDelete = document.getElementsByClassName("posts__post-delete")[0];
-    let postEdit = document.getElementsById(post.postId);
-    postEdit.addEventListener("click", async function () {
-      editModal.classList.remove("hide");
-      modalUpdateTitle.value = post.title;
-      modalUpdateBody.value = post.body;
-      modalUpdateUrl.value = post.url;
-    });
+    // let postEdit = document.getElementById("edit-" + post.postId);
+    // console.log(postEdit);
+    // postEdit.addEventListener("click", async function () {
+    //   console.log(true);
+    // });
   });
 
   console.log(posts);
@@ -207,7 +221,7 @@ async function getData(type) {
 }
 
 // write data to JSON server
-async function setData(type, data) {
+async function setData(type, data, id) {
   if (type === "user") {
     const options = {
       method: "POST",
@@ -228,6 +242,24 @@ async function setData(type, data) {
       body: JSON.stringify({ posts: posts }),
     };
     await fetch(`${API}/${userId}`, options);
+  } else if (type === "editedPost" && id) {
+    let posts = await getData("posts");
+    posts.forEach((post) => {
+      if (post.postId === id) {
+        post.title = data.title;
+        post.body = data.body;
+        post.imgUrl = data.imgUrl;
+      }
+    });
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ posts: posts }),
+    };
+    await fetch(`${API}/${userId}`, options);
+    renderPosts();
   }
 }
 
