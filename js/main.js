@@ -69,23 +69,25 @@ postsContent.addEventListener("click", async function (e) {
     await deleteData("post", parseInt(e.target.id));
   } else if (e.target.classList.contains("posts__post-edit")) {
     console.log(true);
-    console.log(e.target.id);
+    // console.log(e.target.id);
     let currPostTitle = document.getElementById("title-" + e.target.id);
-    console.log(currPostTitle);
+    // console.log(currPostTitle);
     let currPostBody = document.getElementById("body-" + e.target.id);
     let currPostImg = document.getElementById("img-" + e.target.id);
     editModal.classList.remove("hide");
     modalUpdateTitle.value = currPostTitle.textContent;
     modalUpdateBody.value = currPostBody.innerText;
     modalUpdateImg.value = currPostImg.innerText;
-    let editedPostObj = {
-      title: modalUpdateTitle.value,
-      body: modalUpdateBody.value,
-      imgUrl: modalUpdateImg.value,
-    };
+
     // editModal.classList.remove("hide");
     // modalUpdateTitle.value =
     modalUpdateBtn.addEventListener("click", async function () {
+      let editedPostObj = {};
+      editedPostObj.title = modalUpdateTitle.value;
+      editedPostObj.body = modalUpdateBody.value;
+      editedPostObj.imgUrl = modalUpdateImg.value;
+
+      console.log(editedPostObj.title);
       await setData("editedPost", editedPostObj, parseInt(e.target.id));
       editModal.classList.add("hide");
     });
@@ -244,11 +246,13 @@ async function setData(type, data, id) {
     await fetch(`${API}/${userId}`, options);
   } else if (type === "editedPost" && id) {
     let posts = await getData("posts");
+    console.log(data);
     posts.forEach((post) => {
       if (post.postId === id) {
         post.title = data.title;
         post.body = data.body;
         post.imgUrl = data.imgUrl;
+        return;
       }
     });
     const options = {
