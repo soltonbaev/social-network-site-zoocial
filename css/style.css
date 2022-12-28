@@ -7,6 +7,12 @@ body {
   font-family: "Hanken Grotesk", sans-serif;
 }
 
+.first-screen__login-wrapper {
+  /* margin-top: 10%; */
+  width: 300px;
+  margin: auto;
+}
+
 .hide {
   display: none !important;
 }
@@ -27,8 +33,22 @@ body {
 }
 
 .first-screen__login-wrapper {
-  margin-top: 10%;
-  margin-left: 38%;
+  /* margin-top: 10%;
+  margin-left: 38%; */
+}
+
+.first-screen__logo {
+  width: 150px;
+}
+
+.first-screen__logo-wrapper {
+  margin: auto;
+  width: 150px;
+}
+
+.first-screen__motto {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .first-screen__headers {
@@ -85,8 +105,8 @@ body {
 /* create styling */
 .first-screen__create {
   display: none;
-  margin-top: 10%;
-  margin-left: 38%;
+  margin: auto;
+  width: 300px;
   flex-direction: column;
 }
 
