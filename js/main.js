@@ -137,12 +137,11 @@ postBtnAdd.addEventListener("click", async function () {
   await renderPosts();
 });
 
-//event delegation for timeline
+//event deletagion for timeline
 
-container.addEventListener("click", async function (e) {
+timeline.addEventListener("click", async function (e) {
   if (e.target.classList.contains("posts__post-likes-heart")) {
     let heartCount = document.getElementById(`heart-count-${e.target.id}`);
-    e.stopPropagation();
     console.log(heartCount.innerText);
     let newHeartCount = parseInt(heartCount.innerText) + 1;
     await setGlobalLikes(
@@ -150,31 +149,6 @@ container.addEventListener("click", async function (e) {
       parseInt(e.target.id),
       parseInt(e.target.name)
     );
-  } else if (e.target.classList.contains("posts__post-comments")) {
-    let postIcons = document.getElementById(`pi-${e.target.id}`);
-    console.log(true);
-    let commentWrapper = document.createElement("div");
-    let comment = document.createElement("input");
-    let addCommentBtn = document.createElement("button");
-    postIcons.append(commentWrapper);
-    commentWrapper.append(comment);
-    commentWrapper.append(addCommentBtn);
-    addCommentBtn.innerText = "Add comment";
-    addCommentBtn.addEventListener("click", () => {
-      let commentObj = {
-        author: userName,
-        authorId: userId,
-        commentBody: comment.value,
-        timeCreated: getDate(),
-      };
-      postComments(commentObj, e.target.name, e.target.id);
-      commentWrapper.remove();
-    });
-  } else if (e.target.classList.contains("toggle-comments")) {
-    console.log(e.target.id);
-    let commentSection = document.getElementsByName(`${e.target.id}`)[0];
-    console.log(commentSection);
-    commentSection.classList.toggle("hide");
   }
 });
 
@@ -389,21 +363,39 @@ async function setGlobalLikes(data, id, uId) {
 async function getTimelinePosts() {
   console.log("rendering timeline");
   let users = await getData("users");
-  postsContent.innerHTML = "";
   timeline.innerHTML = "";
   users.forEach((user) => {
     postRenderer(timeline, user, user.posts);
   });
-
+  let postIcons = document.getElementsByClassName("post-icons")[0];
   // event handler for post wrapper
-  // console.log(postIcons);
+  console.log(postIcons);
+  postIcons.addEventListener("click", (e) => {
+    console.log("click");
+    if (e.target.classList.contains("posts__post-comments")) {
+      console.log(true);
+      let commentWrapper = document.createElement("div");
+      let comment = document.createElement("input");
+      let addCommentBtn = document.createElement("button");
+      postIcons.append(commentWrapper);
+      commentWrapper.append(comment);
+      commentWrapper.append(addCommentBtn);
+      addCommentBtn.innerText = "Add comment";
+      let commentObj = {
+        author: userName,
+        authorId: userId,
+        commentBody: comment.value,
+        timeCreated: getDate(),
+      };
+      addCommentBtn.addEventListener("click", () => {
+        postComments(commentObj, e.target.name, e.target.id);
+      });
+    }
+  });
 }
-
-function setComments() {}
 
 async function renderPosts() {
   let posts = await getData("posts");
-  timeline.innerHTML = "";
   postsContent.innerHTML = "";
   postRenderer(postsContent, userObject, posts, "currUserPosts");
 }
@@ -428,9 +420,7 @@ function postRenderer(element, user, posts, type) {
                                  <div class="posts__post-comments">
                                  </div>
                                 </div>
-                                <div id ="pi-${
-                                  post.postId
-                                }" class = "post-icons">
+                                <div class = "post-icons">
                                 <div><img name="${user.id}" id="${
       post.postId
     }" class="posts__post-likes-heart" src="${
@@ -444,11 +434,7 @@ function postRenderer(element, user, posts, type) {
                                 <img name="${user.id}" id="${
       post.postId
     }"  class="posts__post-comments" src ="./images/comments.svg">
-                                </img><span id="cs-${
-                                  post.postId
-                                }" class="toggle-comments ">&nbspComments&nbsp${
-      post.comments.length
-    }</span>
+                                </img>
                                 </div><div class="edit-delete-btns ${
                                   type && type === "currUserPosts" ? "" : "hide"
                                 }"><img src="./images/delete.svg" id ="${
@@ -459,28 +445,16 @@ function postRenderer(element, user, posts, type) {
                                   post.postId
                                 }" class="posts__post-edit">
                                 </img>
-                               </div></div><div name="cs-${
-                                 post.postId
-                               }" class="comment-section hide"></div>`;
-    renderComments(post);
-  });
-}
-
-function renderComments(post) {
-  let postSection = document.getElementsByName(`cs-${post.postId}`)[0];
-  post.comments.forEach((comment) => {
-    postSection.innerHTML += `<span>${comment.author}</span><span>${comment.timeCreated}</span><div>${comment.commentBody}</div>`;
+                               </div></div>`;
   });
 }
 
 async function postComments(data, uId, postId) {
-  let posts = await getData("userPosts", uId);
-  console.log("postComments", postId);
-  console.log("postComments", posts);
+  let posts = await getData("userPosts", userId);
+
   posts.forEach((post) => {
-    if (postId == post.postId) {
+    if (postId === post.id) {
       post.comments.push(data);
-      console.log(post.postId);
     }
   });
   const options = {
@@ -491,7 +465,8 @@ async function postComments(data, uId, postId) {
     body: JSON.stringify({ posts: posts }),
   };
   await fetch(`${API}/${uId}`, options);
-  // console.log(posts);
+  getTimelinePosts();
+  console.log(posts);
 }
 
 // get data from JSON server
@@ -583,29 +558,14 @@ const loginForm = document.getElementsByClassName(
 )[0];
 
 regis.addEventListener("click", (e) => {
-  regis.classList.remove("opacity");
-  login.classList.add("opacity");
   regisForm.classList.add("display-flex");
   loginForm.classList.add("display-none");
 });
 
 login.addEventListener("click", (e) => {
-  login.classList.remove("opacity");
-  regis.classList.add("opacity");
   loginForm.classList.add("display-block");
   loginForm.classList.remove("display-none");
   regisForm.classList.remove("display-flex");
-});
-
-//Close registration
-const createBtn = document.getElementsByClassName(
-  "first-screen__create-btn"
-)[0];
-
-console.log(createBtn);
-createBtn.addEventListener("click", () => {
-  regisForm.classList.add("hide");
-  loginForm.classList.remove("display-none");
 });
 
 // console.log(exploreIcon);
@@ -615,5 +575,3 @@ createBtn.addEventListener("click", () => {
 //   profileForm.classList.add("hide");
 //   postForm.classList.remove("hide");
 // });
-
-setComments();
