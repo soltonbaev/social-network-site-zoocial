@@ -244,7 +244,7 @@ async function createNewPost() {
   console.log(postImg);
   let postImage = postImg.value;
   if (postImg.value === "") {
-    postImage = "https://picsum.photos/300/300";
+    postImage = "https://api.lorem.space/image?w=150&h=180";
   }
   const newPostObj = {
     title: postTitle.value,
@@ -343,7 +343,7 @@ async function checkLogin() {
 }
 
 function setUserGlobals(userObj) {
-  welcomeMsg.innerHTML = `<h1>Welcome to the social media, ${userObj.name}</h1>`;
+  welcomeMsg.innerHTML = `<h1>Welcome to the Zoocial Network, <span style="color: #1d9bf0">${userObj.name}</span></h1>`;
   userObject = userObj;
   userId = userObj.id;
   userName = userObj.name;
