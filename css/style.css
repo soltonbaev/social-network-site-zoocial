@@ -91,6 +91,7 @@ body {
 }
 
 .create-inp {
+  background-color: #e8f0fe;
   width: 270px;
   height: 40px;
   border-radius: 8px;
@@ -174,11 +175,11 @@ ul:hover {
 
 /* search input  */
 .search-input {
-  padding-left: 30px;
+  padding-left: 40px;
   color: #dee0e1;
   border-radius: 8px;
-  height: 25px;
-  width: 285px;
+  height: 40px;
+  width: 276px;
   border: #202327;
   background-color: #273340;
   outline: none;
@@ -371,28 +372,19 @@ ul:hover {
   align-items: center;
 }
 
-/*! custom classes */
-.display-block {
-  display: block;
-}
-.display-none {
-  display: none;
-}
-.display-flex {
-  display: flex;
-}
-
-.userpic {
-  width: 30px;
-  margin-bottom: -10px;
-  margin-right: 10px;
-}
-
-.ml-10 {
-  margin-left: 15px;
-}
-
 /*! hovers  */
+
+.list-items {
+  margin-left: 10px;
+}
+
+.login:hover {
+  transform: translateY(-5px);
+}
+
+.regis:hover {
+  transform: translateY(-5px);
+}
 .first-screen__login-btn:hover {
   background-color: #1d79b9;
   transition: ease-in-out 0.2s;
@@ -415,4 +407,66 @@ ul:hover {
 
 .timeline {
   width: 50%;
+}
+
+.profile__logout {
+  position: relative;
+  right: -252px;
+  top: -67px;
+  height: 30px;
+  background-color: #1d9bf0;
+  color: #e7e9ea;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px 25px;
+  font-size: 16px;
+}
+
+/*! custom classes */
+.display-block {
+  display: block;
+}
+.display-none {
+  display: none;
+}
+.display-flex {
+  display: flex;
+}
+
+.userpic {
+  width: 30px;
+  margin-bottom: -10px;
+  margin-right: 10px;
+}
+
+.ml-10 {
+  margin-left: 15px;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.hover {
+  --c: linear-gradient(#ffffff 0 0); /* update the color here */
+
+  padding-bottom: 0.15em;
+  background: var(--c), var(--c);
+  background-size: 0.3em 0.1em;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  transition: 0.3s linear, background-size 0.3s 0.2s linear;
+}
+.hover:hover {
+  background-size: 40% 0.1em;
+  background-position: 10% 100%, 90% 100%;
+}
+
+.ml-18 {
+  margin-left: 18px;
+}
+
+.ml-16 {
+  margin-left: 16px;
 }

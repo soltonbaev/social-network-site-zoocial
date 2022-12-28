@@ -583,14 +583,29 @@ const loginForm = document.getElementsByClassName(
 )[0];
 
 regis.addEventListener("click", (e) => {
+  regis.classList.remove("opacity");
+  login.classList.add("opacity");
   regisForm.classList.add("display-flex");
   loginForm.classList.add("display-none");
 });
 
 login.addEventListener("click", (e) => {
+  login.classList.remove("opacity");
+  regis.classList.add("opacity");
   loginForm.classList.add("display-block");
   loginForm.classList.remove("display-none");
   regisForm.classList.remove("display-flex");
+});
+
+//Close registration
+const createBtn = document.getElementsByClassName(
+  "first-screen__create-btn"
+)[0];
+
+console.log(createBtn);
+createBtn.addEventListener("click", () => {
+  regisForm.classList.add("hide");
+  loginForm.classList.remove("display-none");
 });
 
 // console.log(exploreIcon);
