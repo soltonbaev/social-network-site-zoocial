@@ -437,12 +437,13 @@ async function renderPosts() {
    let posts = await getData('posts');
    timeline.innerHTML = '';
    postsContent.innerHTML = '';
-   postRenderer(postsContent, currentUser, posts, 'currUserPosts');
    currentUser.renderPosts = true;
+   postRenderer(postsContent, currentUser, posts, 'currUserPosts');
 }
 
 function postRenderer(element, user, posts, type) {
    posts.forEach(post => {
+      console.log(post.likes);
       element.innerHTML += `<div id="${
          post.postId
       }" class="posts__post-wrapper">
