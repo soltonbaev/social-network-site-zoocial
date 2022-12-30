@@ -1,226 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="./css/style.css" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HACKATHON DOM JS by Ibraim & Isken</title>
-  </head>
-  <body>
-    <div class="first-screen">
-      <div class="first-screen__login-wrapper">
-        <div class="first-screen__logo-wrapper">
-          <img class="first-screen__logo" src="./images/logo.jpeg" />
-        </div>
-        <div class="first-sreen__create-msg first-screen__motto">
-          where social animals live
-        </div>
-        <div class="first-screen__headers">
-          <h2 class="first-screen__heading login">Login</h2>
-          <h2 class="first-screen__heading regis">Registration</h2>
-        </div>
-        <div class="first-screen__inputs">
-          <input
-            class="first-screen__login-user"
-            type="text"
-            placeholder="username"
-          />
-          <input
-            class="first-screen__login-pass heading"
-            type="password"
-            placeholder="password"
-          />
-          <button class="first-screen__login-btn">Login</button>
-        </div>
-      </div>
-      <div class="first-screen__create">
-        <div class="first-screen__logo-wrapper">
-          <img class="first-screen__logo" src="./images/logo.jpeg" />
-        </div>
-        <div class="first-sreen__create-msg first-screen__motto">
-          where social animals live
-        </div>
-        <div class="first-screen__headers">
-          <h2 class="first-screen__heading login">Login</h2>
-          <h2 class="first-screen__heading regis">Registration</h2>
-        </div>
-        <input
-          class="first-screen__create-name create-inp"
-          type="text"
-          placeholder="First Name"
-        />
-        <input
-          class="first-screen__create-lname create-inp"
-          type="text"
-          placeholder="Last Name"
-        />
-        <input
-          class="first-screen__create-email create-inp"
-          type="email"
-          placeholder="email"
-        />
-        <input
-          class="first-screen__create-user create-inp"
-          type="text"
-          placeholder="username"
-        />
-
-        <input
-          class="first-screen__create-pass create-inp"
-          type="password"
-          placeholder="create a password"
-        />
-        <button class="first-screen__create-btn create-btn">Create</button>
-      </div>
-    </div>
-    <div class="container hide">
-      <div class="sidebar">
-        <ul class="sidebar__wrapper">
-          <img class="logo" src="./images/logo.jpeg" alt="" />
-          <li class="sidebar-items hover home mt-0">
-            <img class="sidebar-icons" src="./images/home.svg" />Home
-          </li>
-          <li class="sidebar-items hover explore explore-icon">
-            <img class="sidebar-icons" src="./images/explore.svg" />Explore
-          </li>
-          <li class="sidebar-items hover profile-icon">
-            <img class="sidebar-icons" src="./images/profile.svg" />Profile
-          </li>
-        </ul>
-      </div>
-      <div class="posts">
-        <div class="posts__wrapper">
-          <div class="welcome">
-            <span class="welcome__msg"></span>
-          </div>
-          <div class="posts__inputs">
-            <h2 class="posts__heading heading">What is on your mind?</h2>
+   <head>
+      <link rel="stylesheet" href="./css/style.css" />
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>HACKATHON DOM JS by Ibraim & Isken</title>
+   </head>
+   <body>
+      <div class="first-screen">
+         <div class="first-screen__login-wrapper">
+            <div class="first-screen__logo-wrapper">
+               <img class="first-screen__logo" src="./images/logo.jpeg" />
+            </div>
+            <div class="first-sreen__create-msg first-screen__motto">
+               where social animals live
+            </div>
+            <div class="first-screen__headers">
+               <h2 class="first-screen__heading login">Login</h2>
+               <h2 class="first-screen__heading regis">Registration</h2>
+            </div>
+            <div class="first-screen__inputs">
+               <input
+                  class="first-screen__login-user"
+                  type="text"
+                  placeholder="username"
+               />
+               <input
+                  class="first-screen__login-pass heading"
+                  type="password"
+                  placeholder="password"
+               />
+               <button class="first-screen__login-btn">Login</button>
+            </div>
+         </div>
+         <div class="first-screen__create">
+            <div class="first-screen__logo-wrapper">
+               <img class="first-screen__logo" src="./images/logo.jpeg" />
+            </div>
+            <div class="first-sreen__create-msg first-screen__motto">
+               where social animals live
+            </div>
+            <div class="first-screen__headers">
+               <h2 class="first-screen__heading login">Login</h2>
+               <h2 class="first-screen__heading regis">Registration</h2>
+            </div>
             <input
-              type="text"
-              class="posts__title tweet-inp"
-              placeholder="enter title"
+               class="first-screen__create-name create-inp"
+               type="text"
+               placeholder="First Name"
             />
             <input
-              type="text"
-              class="posts__body tweet-inp"
-              placeholder="write a post here"
+               class="first-screen__create-lname create-inp"
+               type="text"
+               placeholder="Last Name"
             />
             <input
-              type="url"
-              class="posts__img tweet-inp"
-              placeholder="enter image url"
+               class="first-screen__create-email create-inp"
+               type="email"
+               placeholder="email"
             />
-            <button class="posts__btn-add">Tweet</button>
-          </div>
-          <div class="posts__modal-edit hide">
             <input
-              class="posts__edit-title edit-inp"
-              placeholder="edit post title"
-              type="text"
-            /><input
-              class="posts__edit-body edit-inp"
-              placeholder="edit post body"
-              type="text"
-            /><input
-              class="posts__edit-img edit-inp"
-              placeholder="edit post url"
-              type="text"
+               class="first-screen__create-user create-inp"
+               type="text"
+               placeholder="username"
             />
-            <button class="posts__edit-btn-update">Update</button>
-          </div>
-          <div class="posts__content"></div>
-        </div>
+
+            <input
+               class="first-screen__create-pass create-inp"
+               type="password"
+               placeholder="create a password"
+            />
+            <button class="first-screen__create-btn create-btn">Create</button>
+         </div>
       </div>
+      <div class="container hide">
+         <div class="sidebar">
+            <ul class="sidebar__wrapper">
+               <img class="logo" src="./images/logo.jpeg" alt="" />
+               <li class="sidebar-items hover home mt-0">
+                  <img class="sidebar-icons" src="./images/home.svg" />Home
+               </li>
+               <li class="sidebar-items hover explore explore-icon">
+                  <img
+                     class="sidebar-icons"
+                     src="./images/explore.svg"
+                  />Explore
+               </li>
+               <li class="sidebar-items hover profile-icon">
+                  <img
+                     class="sidebar-icons"
+                     src="./images/profile.svg"
+                  />Profile
+               </li>
+            </ul>
+         </div>
+         <div class="posts">
+            <div class="posts__wrapper">
+               <div class="welcome">
+                  <span class="welcome__msg"></span>
+               </div>
+               <div class="posts__inputs">
+                  <h2 class="posts__heading heading">What is on your mind?</h2>
+                  <input
+                     type="text"
+                     class="posts__title tweet-inp"
+                     placeholder="enter title"
+                  />
+                  <input
+                     type="text"
+                     class="posts__body tweet-inp"
+                     placeholder="write a post here"
+                  />
+                  <input
+                     type="url"
+                     class="posts__img tweet-inp"
+                     placeholder="enter image url"
+                  />
+                  <button class="posts__btn-add">Tweet</button>
+               </div>
+               <div class="posts__modal-edit hide">
+                  <input
+                     class="posts__edit-title edit-inp"
+                     placeholder="edit post title"
+                     type="text"
+                  /><input
+                     class="posts__edit-body edit-inp"
+                     placeholder="edit post body"
+                     type="text"
+                  /><input
+                     class="posts__edit-img edit-inp"
+                     placeholder="edit post url"
+                     type="text"
+                  />
+                  <button class="posts__edit-btn-update">Update</button>
+               </div>
+               <div class="posts__content"></div>
+            </div>
+         </div>
 
-      <div class="profile hide">
-        <div class="profile-lineHeight">
-          <span class="profile-handle">KENCIK</span
-          ><span class="profile__logout"> Log Out</span>
-          <p class="profile-quantity">208 tweets</p>
-        </div>
-        <div>
-          <img
-            class="profile__background-img"
-            src="https://picsum.photos/600/200"
-            alt=""
-          />
-          <span class="profile__profile-img"
-            ><img src="./images/round.png" alt=""
-          /></span>
-        </div>
-        <div class="profile-names">
-          <p class="profile__name">Kencik</p>
-          <p class="profile__handle">@kencik16</p>
-        </div>
-        <div class="display-flex">
-          <div class="osh">
-            <img src="./images/info.svg" alt="" />
-            <p>Osh</p>
-          </div>
-          <div class="osh ml-10">
-            <img src="./images/calendar.svg" alt="" />
-            <p class="profile__joined">Joined October 2021</p>
-          </div>
-        </div>
+         <div class="profile hide">
+            <div class="profile-lineHeight">
+               <span class="profile-handle">KENCIK</span
+               ><span class="profile__logout"> Log Out</span>
+               <p class="profile-quantity">208 tweets</p>
+            </div>
+            <div>
+               <img
+                  class="profile__background-img"
+                  src="https://picsum.photos/600/200"
+                  alt=""
+               />
+               <span class="profile__profile-img"
+                  ><img src="./images/round.png" alt=""
+               /></span>
+            </div>
+            <div class="profile-names">
+               <p class="profile__name">Kencik</p>
+               <p class="profile__handle">@kencik16</p>
+            </div>
+            <div class="display-flex">
+               <div class="osh">
+                  <img src="./images/info.svg" alt="" />
+                  <p>Osh</p>
+               </div>
+               <div class="osh ml-10">
+                  <img src="./images/calendar.svg" alt="" />
+                  <p class="profile__joined">Joined October 2021</p>
+               </div>
+            </div>
+         </div>
+
+         <div class="timeline hide">
+            <div class="timeline-wrapper">
+               <div class="timeline__posts"></div>
+            </div>
+         </div>
+
+         <div class="right-sidebar">
+            <div class="search">
+               <img class="search-img" src="./images/search.svg" alt="" />
+               <input
+                  class="search-input"
+                  type="text"
+                  placeholder="Search Twitter"
+               />
+            </div>
+            <div class="news">
+               <h2 class="news-title">Trends for you</h2>
+               <div class="news-item">
+                  <p class="news-trend">Gaming · Trending</p>
+                  <div class="news-row">
+                     <p class="news-row__main">Dota</p>
+                     <p class="news-row__dots">...</p>
+                  </div>
+                  <p class="news-quantity">2,586 Tweets</p>
+               </div>
+
+               <div class="news-item">
+                  <p class="news-trend">Artist · Trending</p>
+                  <div class="news-row">
+                     <p class="news-row__main">Kanye West</p>
+                     <p class="news-row__dots">...</p>
+                  </div>
+                  <p class="news-quantity">2,586 Tweets</p>
+               </div>
+
+               <div class="news-item">
+                  <p class="news-trend">Football · Trending</p>
+                  <div class="news-row">
+                     <p class="news-row__main">World Cup 2022</p>
+                     <p class="news-row__dots">...</p>
+                  </div>
+                  <p class="news-quantity">2,586 Tweets</p>
+               </div>
+
+               <div class="news-item">
+                  <p class="news-trend">Gaming · Trending</p>
+                  <div class="news-row">
+                     <p class="news-row__main">Valorant</p>
+                     <p class="news-row__dots">...</p>
+                  </div>
+                  <p class="news-quantity">2,586 Tweets</p>
+               </div>
+
+               <p class="show-more">Show more...</p>
+            </div>
+         </div>
       </div>
-      <div class="timeline hide">
-        <div class="timeline-wrapper">
-          <div class="timeline__posts"></div>
-        </div>
-      </div>
-
-      <div class="right-sidebar">
-        <div class="search">
-          <img class="search-img" src="./images/search.svg" alt="" />
-          <input
-            class="search-input"
-            type="text"
-            placeholder="Search Twitter"
-          />
-        </div>
-        <div class="news">
-          <h2 class="news-title">Trends for you</h2>
-          <div class="news-item">
-            <p class="news-trend">Gaming · Trending</p>
-            <div class="news-row">
-              <p class="news-row__main">Dota</p>
-              <p class="news-row__dots">...</p>
-            </div>
-            <p class="news-quantity">2,586 Tweets</p>
-          </div>
-
-          <div class="news-item">
-            <p class="news-trend">Artist · Trending</p>
-            <div class="news-row">
-              <p class="news-row__main">Kanye West</p>
-              <p class="news-row__dots">...</p>
-            </div>
-            <p class="news-quantity">2,586 Tweets</p>
-          </div>
-
-          <div class="news-item">
-            <p class="news-trend">Football · Trending</p>
-            <div class="news-row">
-              <p class="news-row__main">World Cup 2022</p>
-              <p class="news-row__dots">...</p>
-            </div>
-            <p class="news-quantity">2,586 Tweets</p>
-          </div>
-
-          <div class="news-item">
-            <p class="news-trend">Gaming · Trending</p>
-            <div class="news-row">
-              <p class="news-row__main">Valorant</p>
-              <p class="news-row__dots">...</p>
-            </div>
-            <p class="news-quantity">2,586 Tweets</p>
-          </div>
-
-          <p class="show-more">Show more...</p>
-        </div>
-      </div>
-    </div>
-    <script src="./js/main.js"></script>
-  </body>
+      <script src="./js/main.js"></script>
+   </body>
 </html>
