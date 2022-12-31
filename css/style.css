@@ -7,32 +7,46 @@ body {
    font-family: 'Hanken Grotesk', sans-serif;
 }
 
-.first-screen__login-wrapper {
-   /* margin-top: 10%; */
+.first-screen {
    width: 300px;
    margin: auto;
+}
+
+.first-screen__login {
+   /* margin-top: 10%; */
+   /* width: 300px;
+    */
 }
 
 .hide {
    display: none !important;
 }
 
-.container {
+.app {
    display: flex;
    justify-content: space-evenly;
    max-width: 1200px;
    margin: 0 auto;
 }
 
-.posts {
+.content__my-posts {
+   width: 400px;
+   margin: auto;
+}
+.content {
    width: 50%;
 }
 
-.sidebar {
+.my-posts__container {
+   width: 400px;
+   margin: auto;
+}
+
+.app__sidebar {
    width: 25%;
 }
 
-.first-screen__login-wrapper {
+.first-screen__login {
    /* margin-top: 10%;
   margin-left: 38%; */
 }
@@ -57,6 +71,10 @@ body {
    cursor: pointer;
 }
 
+.first-screen__login-title {
+   color: #1d9bf0;
+}
+
 .regis {
    margin-left: 40px;
 }
@@ -66,70 +84,37 @@ body {
    flex-direction: column;
 }
 
-/* инпуты логина */
-.first-screen__login-user {
-   width: 270px;
-   height: 40px;
-   border-radius: 8px;
-   outline: none;
-   border: none;
-   padding-left: 20px;
-   margin-bottom: 30px;
+.first-screen__input {
+   /* height: 30px; */
+   /* margin-bottom: 30px; */
 }
 
-.first-screen__login-pass {
-   width: 270px;
-   height: 40px;
-   border-radius: 8px;
-   outline: none;
-   border: none;
-   padding-left: 20px;
-   margin-bottom: 30px;
-}
+/* инпуты логина */
 
 .first-screen__login-btn {
-   width: 270px;
-   background-color: #1d9bf0;
-   color: #ffffff;
-   height: 40px;
-   width: 295px;
-   border-radius: 8px;
    border: none;
    cursor: pointer;
 }
 
-.first-screen__create {
-   display: none;
+.first-screen__headings {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.first-screen__heading:hover {
+   cursor: pointer;
+   color: #1d9bf0;
+}
+
+.sidebar__item:hover {
+   cursor: pointer;
+   color: #1d9bf0;
 }
 
 /* create styling */
 .first-screen__create {
-   display: none;
    margin: auto;
-   width: 300px;
    flex-direction: column;
-}
-
-.create-inp {
-   width: 270px;
-   height: 40px;
-   border-radius: 8px;
-   outline: none;
-   border: none;
-   padding-left: 20px;
-   margin-bottom: 30px;
-}
-
-.create-btn {
-   width: 270px;
-   background-color: #1d9bf0;
-   color: #ffffff;
-   height: 40px;
-   width: 295px;
-   border-radius: 8px;
-   border: none;
-   cursor: pointer;
-   margin-bottom: 50px;
 }
 
 /* sidebar css */
@@ -138,64 +123,86 @@ body {
    height: 90px;
 }
 
-.sidebar__wrapper {
+.welcome__msg {
+   font-size: 1.5rem;
+}
+
+.sidebar__container {
+   margin: auto;
    position: -webkit-sticky;
    position: sticky;
    top: 0;
-   font-size: 25px;
+   width: 150px;
+   font-size: 1.5rem;
    list-style: none;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
 }
 
-.sidebar-items {
+.sidebar__item {
    margin-top: 40px;
 }
 
-.sidebar-icons {
+.sidebar__icon {
    /* position: absolute; */
    left: 70px;
 }
 
-.tweet-inp {
-   width: 290px;
-   height: 40px;
+.app__input {
+   box-sizing: border-box;
+   width: 100%;
    border-radius: 8px;
    outline: none;
    border: none;
-   padding-left: 20px;
-   margin-bottom: 30px;
+   padding: 1rem;
+   height: 3.5rem;
+   margin: 1rem 0;
    background-color: #273340;
    color: #e7e9ea;
 }
 
-.posts__btn-add {
+.add-post__inputs {
+   display: flex;
+   flex-direction: column;
+}
+
+.app__btn {
+   width: 100%;
    background-color: #1d9bf0;
    color: #ffffff;
-   height: 30px;
-   width: 93px;
+   height: 3rem;
    border-radius: 8px;
    border: none;
    cursor: pointer;
-   margin-left: 217px;
+   margin: 1rem 0;
+}
+
+.add-post__body {
+   resize: none;
+   height: 200px;
+}
+
+textarea {
+   font-family: 'Hanken Grotesk', sans-serif !important;
+}
+
+.add-post__body::placeholder {
+   font-family: initial;
+}
+
+.add-post__btn {
+   width: 93px;
+   align-self: end;
 }
 
 /* search input  */
-.search-input {
-   padding-left: 30px;
-   color: #dee0e1;
-   border-radius: 8px;
-   height: 25px;
-   width: 285px;
-   border: #202327;
-   background-color: #273340;
-   outline: none;
+.search__input {
+   padding-left: 3rem;
 }
 
-.right-sidebar {
+.app__trending {
    width: 25%;
-   margin-left: 40px;
    margin-top: 30px;
 }
 
@@ -203,12 +210,11 @@ body {
    position: -webkit-sticky;
    position: sticky;
    top: 0;
-   width: 320px;
    background-color: #273340;
    border-radius: 6px;
 }
 
-.news-title {
+.news__title {
    margin-left: 20%;
    padding-top: 10px;
 }
@@ -259,19 +265,23 @@ body {
    cursor: pointer;
 }
 
-.search-img {
+.search {
+   position: relative;
+}
+
+.search__icon {
    position: absolute;
+   top: 50%;
+   transform: translate(50%, -50%);
 }
 
 /* post css */
 
 .posts__post-wrapper {
    background-color: #273340;
-   padding-left: 30px;
-   padding-top: 15px;
-   padding-bottom: 15px;
-   border-radius: 7px;
-   margin-top: 30px;
+   padding: 1rem;
+   border-radius: 0.5rem;
+   margin: 1.5rem 0;
 }
 
 .post-icons {
@@ -297,8 +307,10 @@ body {
 
 /* modal */
 
-.posts__modal-edit {
-   margin-top: 40px;
+.edit-modal {
+   width: 400px;
+   margin: auto;
+   padding: 20px 0;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -308,17 +320,14 @@ body {
    border-radius: 10px;
 }
 
-.edit-inp {
-   width: 250px;
-   padding-left: 30px;
-   color: #dee0e1;
-   border-radius: 8px;
-   height: 50px;
-   width: 285px;
+.edit-modal__input {
    border: #202327;
    background-color: #0f2a3b;
-   outline: none;
-   margin-top: 30px;
+}
+
+.edit-modal__body {
+   resize: none;
+   height: 200px;
 }
 
 .edit-inp::placeholder {
@@ -336,8 +345,12 @@ body {
    margin-top: 50px;
 }
 
-.profile {
+.content__profile {
    margin-top: 35px;
+}
+
+.profile__handler::before {
+   content: '@';
 }
 
 .profile-lineHeight {
@@ -412,18 +425,17 @@ body {
    transition: ease-in-out 0.2s;
 }
 
-.posts__wrapper {
+.add-post {
    margin: auto;
    width: 400px;
 }
 
 .timeline-wrapper {
-   width: 400px;
-   margin: auto;
 }
 
-.timeline {
-   width: 50%;
+.content__timeline {
+   width: 400px;
+   margin: auto;
 }
 
 .posts__post-likes-tooltip {
@@ -442,6 +454,7 @@ body {
    height: 100px;
    width: 200px;
    margin: 10px;
+   resize: none;
 }
 
 .post__comment-btn-add {
