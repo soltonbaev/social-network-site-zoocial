@@ -71,6 +71,12 @@
          </div>
       </div>
       <div class="app hide">
+         <div class="app__mobile-navbar">
+            <img class="app__hamburger" src="./images/hamburger.png" /><img
+               class="app__logo-mobile"
+               src="./images/logo.jpeg"
+            /><img class="app__mobile-search" src="./images/search.svg" />
+         </div>
          <section class="app__sidebar sidebar">
             <navbar class="sidebar__container">
                <img class="logo" src="./images/logo.jpeg" alt="" />
@@ -137,38 +143,37 @@
                      placeholder="edit post url"
                      type="text"
                   />
-                  <button class="posts__edit-btn-update">Update</button>
+                  <button class="edit-modal__btn app__btn">Update</button>
                </div>
                <div class="my-posts__container"></div>
             </div>
-            <div class="content__profile hide">
-               <div class="profile-lineHeight">
-                  <span class="profile-handle">KENCIK</span
+            <div class="content__profile profile hide">
+               <div class="profile__top-info">
+                  <span class="profile__name">KENCIK</span
                   ><span class="profile__logout"> Log Out</span>
                   <p class="profile-quantity">208 tweets</p>
                </div>
-               <div>
+               <div class="profile__images">
                   <img
-                     class="profile__background-img"
+                     class="profile__background-cover"
                      src="https://picsum.photos/600/200"
                      alt=""
                   />
-                  <span class="profile__profile-img"
+                  <span class="profile__avatar"
                      ><img src="./images/round.png" alt=""
                   /></span>
                </div>
                <div class="profile-names">
-                  <p class="profile__name">Kencik</p>
-                  <p class="profile__handle">@kencik16</p>
+                  <p class="profile__handle"></p>
                </div>
-               <div class="display-flex">
-                  <div class="osh">
+               <div class="profile__left-bottom-info">
+                  <div class="profile__location">
                      <img src="./images/info.svg" alt="" />
                      <p>Osh</p>
                   </div>
-                  <div class="osh ml-10">
+                  <div class="profile__date-joined">
                      <img src="./images/calendar.svg" alt="" />
-                     <p class="profile__joined">Joined October 2021</p>
+                     <p class="profile__date-joined-txt">Joined October 2021</p>
                   </div>
                </div>
             </div>
@@ -229,6 +234,10 @@
             </div>
          </section>
       </div>
+      <footer>
+         &copy; 2023 crafted by <a href="https://soltonbaev">Ibraim</a> and
+         <a href="https://github.com/17seventeeeeen?tab=repositories">Isken</a>
+      </footer>
       <script src="./js/main.js"></script>
    </body>
 </html>
