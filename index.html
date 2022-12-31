@@ -9,140 +9,139 @@
    </head>
    <body>
       <div class="first-screen">
-         <div class="first-screen__login-wrapper">
-            <div class="first-screen__logo-wrapper">
-               <img class="first-screen__logo" src="./images/logo.jpeg" />
-            </div>
-            <div class="first-sreen__create-msg first-screen__motto">
-               where social animals live
-            </div>
-            <div class="first-screen__headers">
-               <h2 class="first-screen__heading login">Login</h2>
-               <h2 class="first-screen__heading regis">Registration</h2>
-            </div>
+         <div class="first-screen__logo-wrapper">
+            <img class="first-screen__logo" src="./images/logo.jpeg" />
+         </div>
+         <div class="first-screen__motto">where social animals live</div>
+         <div class="first-screen__headings">
+            <h2
+               class="app__heading first-screen__heading first-screen__login-title"
+            >
+               Login
+            </h2>
+            <h2
+               class="app__heading first-screen__heading first-screen__register-title"
+            >
+               Registration
+            </h2>
+         </div>
+         <div class="first-screen__login">
             <div class="first-screen__inputs">
                <input
-                  class="first-screen__login-user"
+                  class="first-screen__login-user first-screen__input app__input"
                   type="text"
                   placeholder="username"
                />
                <input
-                  class="first-screen__login-pass heading"
+                  class="first-screen__login-pass first-screen__input app__input heading"
                   type="password"
                   placeholder="password"
                />
-               <button class="first-screen__login-btn">Login</button>
+               <button class="first-screen__login-btn app__btn">Login</button>
             </div>
          </div>
-         <div class="first-screen__create">
-            <div class="first-screen__logo-wrapper">
-               <img class="first-screen__logo" src="./images/logo.jpeg" />
-            </div>
-            <div class="first-sreen__create-msg first-screen__motto">
-               where social animals live
-            </div>
-            <div class="first-screen__headers">
-               <h2 class="first-screen__heading login">Login</h2>
-               <h2 class="first-screen__heading regis">Registration</h2>
-            </div>
+         <div class="first-screen__create hide">
             <input
-               class="first-screen__create-name create-inp"
+               class="first-screen__create-name first-screen__input app__input"
                type="text"
                placeholder="First Name"
             />
             <input
-               class="first-screen__create-lname create-inp"
+               class="first-screen__create-lname first-screen__input app__input"
                type="text"
                placeholder="Last Name"
             />
             <input
-               class="first-screen__create-email create-inp"
+               class="first-screen__create-email first-screen__input app__input"
                type="email"
                placeholder="email"
             />
             <input
-               class="first-screen__create-user create-inp"
+               class="first-screen__create-user first-screen__input app__input"
                type="text"
                placeholder="username"
             />
 
             <input
-               class="first-screen__create-pass create-inp"
+               class="first-screen__create-pass first-screen__input app__input"
                type="password"
                placeholder="create a password"
             />
-            <button class="first-screen__create-btn create-btn">Create</button>
+            <button class="first-screen__create-btn app__btn">Create</button>
          </div>
       </div>
-      <div class="container hide">
-         <section class="sidebar">
-            <navbar class="sidebar__wrapper">
+      <div class="app hide">
+         <section class="app__sidebar sidebar">
+            <navbar class="sidebar__container">
                <img class="logo" src="./images/logo.jpeg" alt="" />
-               <li class="sidebar-items hover home mt-0">
-                  <img class="sidebar-icons" src="./images/home.svg" />Home
+               <li class="sidebar__item sidebar__home mt-0">
+                  <img class="sidebar__icon" src="./images/home.svg" />Home
                </li>
-               <li class="sidebar-items hover explore explore-icon">
+               <li class="sidebar__item sidebar__explore">
                   <img
-                     class="sidebar-icons"
+                     class="sidebar__icon"
                      src="./images/explore.svg"
                   />Explore
                </li>
-               <li class="sidebar-items hover profile-icon">
+               <li class="sidebar__item sidebar__profile">
                   <img
-                     class="sidebar-icons"
+                     class="sidebar__icon"
                      src="./images/profile.svg"
                   />Profile
                </li>
             </navbar>
          </section>
-         <section class="content">
-            <div class="posts">
-               <div class="posts__wrapper">
-                  <div class="welcome">
-                     <span class="welcome__msg"></span>
-                  </div>
-                  <div class="posts__inputs">
-                     <h2 class="posts__heading heading">
+         <section class="app__content content">
+            <div class="content__my-posts my-posts">
+               <div class="welcome">
+                  <span class="welcome__msg"></span>
+               </div>
+               <div class="add-post">
+                  <div class="add-post__container">
+                     <h2 class="add-post__heading heading">
                         What is on your mind?
                      </h2>
-                     <input
-                        type="text"
-                        class="posts__title tweet-inp"
-                        placeholder="enter title"
-                     />
-                     <input
-                        type="text"
-                        class="posts__body tweet-inp"
-                        placeholder="write a post here"
-                     />
-                     <input
-                        type="url"
-                        class="posts__img tweet-inp"
-                        placeholder="enter image url"
-                     />
-                     <button class="posts__btn-add">Tweet</button>
-                  </div>
-                  <div class="posts__modal-edit hide">
-                     <input
-                        class="posts__edit-title edit-inp"
-                        placeholder="edit post title"
-                        type="text"
-                     /><input
-                        class="posts__edit-body edit-inp"
-                        placeholder="edit post body"
-                        type="text"
-                     /><input
-                        class="posts__edit-img edit-inp"
-                        placeholder="edit post url"
-                        type="text"
-                     />
-                     <button class="posts__edit-btn-update">Update</button>
-                  </div>
-                  <div class="posts__content"></div>
-               </div>
-            </div>
+                     <div class="add-post__inputs app__input-container">
+                        <input
+                           type="text"
+                           class="add-post__title app__input"
+                           placeholder="enter title"
+                        />
+                        <textarea
+                           type="text"
+                           class="add-post__body app__input"
+                           placeholder="write a post here"
+                        ></textarea>
 
-            <div class="profile hide">
+                        <input
+                           type="url"
+                           class="add-post__img app__input"
+                           placeholder="enter image url"
+                        />
+                        <button class="add-post__btn app__btn">Tweet</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="edit-modal hide">
+                  <input
+                     class="edit-modal__title app__input edit-modal__input"
+                     placeholder="edit post title"
+                     type="text"
+                  /><textarea
+                     class="edit-modal__body app__input edit-modal__input"
+                     placeholder="edit post body"
+                     type="text"
+                  ></textarea
+                  ><input
+                     class="edit-modal__img app__input edit-modal__input"
+                     placeholder="edit post url"
+                     type="text"
+                  />
+                  <button class="posts__edit-btn-update">Update</button>
+               </div>
+               <div class="my-posts__container"></div>
+            </div>
+            <div class="content__profile hide">
                <div class="profile-lineHeight">
                   <span class="profile-handle">KENCIK</span
                   ><span class="profile__logout"> Log Out</span>
@@ -173,24 +172,23 @@
                   </div>
                </div>
             </div>
-            <div class="timeline hide">
+            <div class="content__timeline hide">
                <div class="timeline-wrapper">
                   <div class="timeline__posts"></div>
                </div>
             </div>
          </section>
-
-         <section class="right-sidebar">
+         <section class="app__trending">
             <div class="search">
-               <img class="search-img" src="./images/search.svg" alt="" />
+               <img class="search__icon" src="./images/search.svg" alt="" />
                <input
-                  class="search-input"
+                  class="search__input app__input"
                   type="text"
                   placeholder="Search Twitter"
                />
             </div>
             <div class="news">
-               <h2 class="news-title">Trends for you</h2>
+               <h2 class="news__title">Trends for you</h2>
                <div class="news-item">
                   <p class="news-trend">Gaming · Trending</p>
                   <div class="news-row">

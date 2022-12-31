@@ -46,37 +46,37 @@ let inpName = document.getElementsByClassName('first-screen__create-name')[0];
 let inpLastName = document.getElementsByClassName(
    'first-screen__create-lname'
 )[0];
-let container = document.getElementsByClassName('container')[0];
+let container = document.getElementsByClassName('app')[0];
 
-let editModal = document.getElementsByClassName('posts__modal-edit')[0];
+let editModal = document.getElementsByClassName('edit-modal')[0];
 let modalUpdateBtn = document.getElementsByClassName(
    'posts__edit-btn-update'
 )[0];
-let modalUpdateTitle = document.getElementsByClassName('posts__edit-title')[0];
-let modalUpdateBody = document.getElementsByClassName('posts__edit-body')[0];
-let modalUpdateImg = document.getElementsByClassName('posts__edit-img')[0];
+let modalUpdateTitle = document.getElementsByClassName('edit-modal__title')[0];
+let modalUpdateBody = document.getElementsByClassName('edit-modal__body')[0];
+let modalUpdateImg = document.getElementsByClassName('edit-modal__img')[0];
 
 // grab 'ADD POST' inputs
 
-let postTitle = document.getElementsByClassName('posts__title')[0];
-let postBody = document.getElementsByClassName('posts__body')[0];
-let postImg = document.getElementsByClassName('posts__img')[0];
-let postBtnAdd = document.getElementsByClassName('posts__btn-add')[0];
-let postsContent = document.getElementsByClassName('posts__content')[0];
+let postTitle = document.getElementsByClassName('add-post__title')[0];
+let postBody = document.getElementsByClassName('add-post__body')[0];
+let postImg = document.getElementsByClassName('add-post__img')[0];
+let postBtnAdd = document.getElementsByClassName('add-post__btn')[0];
+let postsContent = document.getElementsByClassName('my-posts__container')[0];
 
-let createMsg = document.getElementsByClassName('first-sreen__create-msg')[0];
+let createMsg = document.getElementsByClassName('first-screen__motto')[0];
 
-let sidebarExplore = document.getElementsByClassName('explore')[0];
+let sidebarExplore = document.getElementsByClassName('sidebar__explore')[0];
 
-let home = document.getElementsByClassName('home')[0];
+let home = document.getElementsByClassName('sidebar__home')[0];
 let joined = document.getElementsByClassName('profile__joined')[0];
 
 //show profile
 
-const profileIcon = document.getElementsByClassName('profile-icon')[0];
-const profileForm = document.getElementsByClassName('profile')[0];
+const profileIcon = document.getElementsByClassName('sidebar__profile')[0];
+const profileForm = document.getElementsByClassName('content__profile')[0];
 
-const postForm = document.getElementsByClassName('posts')[0];
+const postForm = document.getElementsByClassName('content__my-posts')[0];
 // const exploreIcon = document.getElementsByClassName("explore-icon")[0];
 
 // get profile elements
@@ -107,7 +107,7 @@ profileIcon.addEventListener('click', () => {
 let timeline = document.getElementsByClassName('timeline-wrapper')[0];
 console.log(timeline);
 
-let timelineContainer = document.getElementsByClassName('timeline')[0];
+let timelineContainer = document.getElementsByClassName('content__timeline')[0];
 let logOut = document.getElementsByClassName('profile__logout')[0];
 
 logOut.addEventListener('click', () => {
@@ -115,7 +115,7 @@ logOut.addEventListener('click', () => {
    location.reload();
 });
 
-let posts = document.getElementsByClassName('posts')[0];
+let posts = document.getElementsByClassName('content__my-posts')[0];
 
 sidebarExplore.addEventListener('click', () => {
    profileForm.classList.add('hide');
@@ -308,6 +308,9 @@ async function loginUser() {
          inpUserLogin.value === users[i].username &&
          inpPassLogin.value === users[i].password
       ) {
+         console.log(createMsg);
+         createMsg.innerText = 'User found. Logging in...';
+         createMsg.style.color = 'green';
          isUserAuthenticated = true;
          setUserGlobals(users[i]);
          await setProfileData(users[i]);
@@ -358,7 +361,7 @@ function setUserGlobals(userObj) {
 async function setProfileData(userObj) {
    tweetCount.innerText = `Tweets: ${await countPosts()}`;
    profileTopName.innerText = userName;
-   profileBottomHandle.innerText = userHandle;
+   profileBottomHandle.innerText = '@' + userHandle;
    profileBottomName.innerText = `${userName} ${userlName}`;
    console.log(userObj.dateJoined);
    joined.innerText = 'Date joined ' + userObj.dateJoined;
@@ -623,22 +626,27 @@ async function nukeAll() {
 // nukeAll();
 
 // show registration
-const regis = document.getElementsByClassName('regis')[0];
-const login = document.getElementsByClassName('login')[1];
-const regisForm = document.getElementsByClassName('first-screen__create')[0];
-const loginForm = document.getElementsByClassName(
-   'first-screen__login-wrapper'
+const registerTitle = document.getElementsByClassName(
+   'first-screen__register-title'
 )[0];
+const loginTitle = document.getElementsByClassName(
+   'first-screen__login-title'
+)[0];
+const registerForm = document.getElementsByClassName('first-screen__create')[0];
+const loginForm = document.getElementsByClassName('first-screen__login')[0];
 
-regis.addEventListener('click', e => {
-   regisForm.classList.add('display-flex');
-   loginForm.classList.add('display-none');
+registerTitle.addEventListener('click', e => {
+   registerForm.classList.remove('hide');
+   registerTitle.style.color = '#1d9bf0';
+   loginTitle.style.color = 'white';
+   loginForm.classList.add('hide');
 });
 
-login.addEventListener('click', e => {
-   loginForm.classList.add('display-block');
-   loginForm.classList.remove('display-none');
-   regisForm.classList.remove('display-flex');
+loginTitle.addEventListener('click', e => {
+   loginForm.classList.remove('hide');
+   loginTitle.style.color = '#1d9bf0';
+   registerTitle.style.color = 'white';
+   registerForm.classList.add('hide');
 });
 
 // console.log(exploreIcon);
