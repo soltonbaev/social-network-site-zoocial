@@ -66,10 +66,11 @@ let postsContent = document.getElementsByClassName('my-posts__container')[0];
 
 let createMsg = document.getElementsByClassName('first-screen__motto')[0];
 
+let sidebar = document.getElementsByClassName('app__sidebar')[0];
 let sidebarExplore = document.getElementsByClassName('sidebar__explore')[0];
 
 let home = document.getElementsByClassName('sidebar__home')[0];
-let joined = document.getElementsByClassName('profile__joined')[0];
+let joined = document.getElementsByClassName('profile__date-joined-txt')[0];
 
 //show profile
 
@@ -80,10 +81,25 @@ const postForm = document.getElementsByClassName('content__my-posts')[0];
 // const exploreIcon = document.getElementsByClassName("explore-icon")[0];
 
 // get profile elements
-let profileTopName = document.getElementsByClassName('profile-handle')[0];
+let profileTopName = document.getElementsByClassName('profile__name')[0];
 let tweetCount = document.getElementsByClassName('profile-quantity')[0];
 let profileBottomHandle = document.getElementsByClassName('profile__handle')[0];
 let profileBottomName = document.getElementsByClassName('profile__name')[0];
+
+let mobileSearch = document.getElementsByClassName('app__mobile-search')[0];
+let appContent = document.getElementsByClassName('app__content')[0];
+
+let trending = document.getElementsByClassName('app__trending')[0];
+
+mobileSearch.addEventListener('click', () => {
+   appContent.style.display = 'none';
+   trending.style.display = 'block';
+});
+
+let hamburger = document.getElementsByClassName('app__hamburger')[0];
+hamburger.addEventListener('click', () => {
+   sidebar.style.display = 'block';
+});
 
 async function countPosts() {
    let countPosts = await getData('posts', userId);
@@ -96,12 +112,24 @@ home.addEventListener('click', () => {
    postForm.classList.remove('hide');
    timelineContainer.classList.add('hide');
    renderPosts();
+   let isMobile = window.matchMedia('(max-width: 500px)');
+   if (isMobile.matches) {
+      sidebar.style.display = 'none';
+      trending.style.display = 'none';
+      appContent.style.display = 'block';
+   }
 });
 
 profileIcon.addEventListener('click', () => {
    profileForm.classList.remove('hide');
    postForm.classList.add('hide');
    timelineContainer.classList.add('hide');
+   let isMobile = window.matchMedia('(max-width: 500px)');
+   if (isMobile.matches) {
+      sidebar.style.display = 'none';
+      trending.style.display = 'none';
+      appContent.style.display = 'block';
+   }
 });
 
 let timeline = document.getElementsByClassName('timeline-wrapper')[0];
@@ -122,6 +150,12 @@ sidebarExplore.addEventListener('click', () => {
    posts.classList.add('hide');
    timelineContainer.classList.remove('hide');
    getTimelinePosts();
+   let isMobile = window.matchMedia('(max-width: 500px)');
+   if (isMobile.matches) {
+      sidebar.style.display = 'none';
+      trending.style.display = 'none';
+      appContent.style.display = 'block';
+   }
 });
 
 // listeners
@@ -133,7 +167,7 @@ btnCreate.addEventListener('click', async function () {
 });
 
 postBtnAdd.addEventListener('click', async function () {
-   await createNewPost();
+   await createNewPost('post');
    await renderPosts();
 });
 
@@ -223,7 +257,8 @@ async function createNewUser() {
          return;
       }
    });
-
+   createMsg.innerText = 'Creating your account...';
+   createMsg.style.color = 'orange';
    const newUser = {
       name: inpName.value,
       lastName: inpLastName.value,
@@ -235,18 +270,20 @@ async function createNewUser() {
       dateJoined: getDate(),
    };
 
-   console.log('newest ', newUser);
    await setData('user', newUser);
    createMsg.innerText =
       'You account has been successfuly created. Use your credentials to login';
    createMsg.style.color = 'green';
 }
 
-async function createNewPost() {
-   console.log(postImg);
+async function createNewPost(type, sharedPostId) {
    let postImage = postImg.value;
    if (postImg.value === '') {
-      postImage = 'https://api.lorem.space/image?w=150&h=180';
+      try {
+         postImage = 'https://api.lorem.space/image?w=150&h=180';
+      } catch (error) {
+         console.log(error);
+      }
    }
    const newPostObj = {
       title: postTitle.value,
@@ -257,7 +294,12 @@ async function createNewPost() {
       likes: [],
       comments: [],
       sharedby: [],
+      type: type,
+      sharedPostId: '',
    };
+   if (sharedPostId) {
+      newPostObj.sharedPostId = sharedPostId;
+   }
    await setData('post', newPostObj);
 }
 // delete data
@@ -570,6 +612,7 @@ async function setData(type, data, id) {
          body: JSON.stringify(data),
       };
       await fetch(API, options);
+      return;
    } else if (type === 'post') {
       let posts = await getData('posts');
       posts.push(data);
