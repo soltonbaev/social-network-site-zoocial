@@ -1,6 +1,6 @@
 //! ============================DECLARE GLOBALS============================
 // set JSON server API
-const API = 'https://soltonbaev.com/json-server/api/zocial';
+const API = 'https://soltonbaev.com/json-server/api/zoocial';
 
 let userId = null;
 let userName;
