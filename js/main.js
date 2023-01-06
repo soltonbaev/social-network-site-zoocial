@@ -1,6 +1,6 @@
-//! ===========================================DECLARE GLOBALS=======================================
+//! ============================DECLARE GLOBALS============================
 // set JSON server API
-const API = 'https://sltnbv-json-server.herokuapp.com/hackathon-dom-js';
+const API = 'https://soltonbaev.com/json-server/api/zocial';
 
 let userId = null;
 let userName;
@@ -9,19 +9,22 @@ let userHandle;
 let userPic;
 let currentUser;
 let loginState = getLogIn();
-console.log(loginState);
-function getDate() {
-   let date = new Date();
-   let buildDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
-   return buildDate;
-}
 
-// console.log(getDate());
+//! ===========================GRAB ELEMENTS==============================
+// grab login sections
+let loginModal = document.getElementsByClassName('first-screen')[0];
+const registerForm = document.getElementsByClassName('first-screen__create')[0];
+const loginForm = document.getElementsByClassName('first-screen__login')[0];
+let createMsg = document.getElementsByClassName('first-screen__motto')[0];
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// grab login titles
+const registerTitle = document.getElementsByClassName(
+   'first-screen__register-title'
+)[0];
+const loginTitle = document.getElementsByClassName(
+   'first-screen__login-title'
+)[0];
 
-//! ===========================================GRAB ELEMENTS=======================================
-// grab login elements
 let inpUserLogin = document.getElementsByClassName(
    'first-screen__login-user'
 )[0];
@@ -29,7 +32,13 @@ let inpPassLogin = document.getElementsByClassName(
    'first-screen__login-pass'
 )[0];
 let btnLogin = document.getElementsByClassName('first-screen__login-btn')[0];
-//grab create elements
+
+//grab create account elements
+
+let inpName = document.getElementsByClassName('first-screen__create-name')[0];
+let inpLastName = document.getElementsByClassName(
+   'first-screen__create-lname'
+)[0];
 let inpUserCreate = document.getElementsByClassName(
    'first-screen__create-user'
 )[0];
@@ -40,14 +49,12 @@ let inpEmailCreate = document.getElementsByClassName(
    'first-screen__create-email'
 )[0];
 let btnCreate = document.getElementsByClassName('first-screen__create-btn')[0];
-let loginModal = document.getElementsByClassName('first-screen')[0];
-let welcomeMsg = document.getElementsByClassName('welcome__msg')[0];
-let inpName = document.getElementsByClassName('first-screen__create-name')[0];
-let inpLastName = document.getElementsByClassName(
-   'first-screen__create-lname'
-)[0];
+
+// grab APP container
+
 let container = document.getElementsByClassName('app')[0];
 
+// grab post edit modal elements
 let editModal = document.getElementsByClassName('edit-modal')[0];
 let modalUpdateBtn = document.getElementsByClassName(
    'posts__edit-btn-update'
@@ -57,56 +64,83 @@ let modalUpdateBody = document.getElementsByClassName('edit-modal__body')[0];
 let modalUpdateImg = document.getElementsByClassName('edit-modal__img')[0];
 
 // grab 'ADD POST' inputs
-
+let welcomeMsg = document.getElementsByClassName('welcome__msg')[0];
 let postTitle = document.getElementsByClassName('add-post__title')[0];
 let postBody = document.getElementsByClassName('add-post__body')[0];
 let postImg = document.getElementsByClassName('add-post__img')[0];
 let postBtnAdd = document.getElementsByClassName('add-post__btn')[0];
-let postsContent = document.getElementsByClassName('my-posts__container')[0];
 
-let createMsg = document.getElementsByClassName('first-screen__motto')[0];
-
-let sidebar = document.getElementsByClassName('app__sidebar')[0];
-let sidebarExplore = document.getElementsByClassName('sidebar__explore')[0];
-
-let home = document.getElementsByClassName('sidebar__home')[0];
-let joined = document.getElementsByClassName('profile__date-joined-txt')[0];
-
-//show profile
-
-const profileIcon = document.getElementsByClassName('sidebar__profile')[0];
-const profileForm = document.getElementsByClassName('content__profile')[0];
-
+// grab MY-POSTS section
 const postForm = document.getElementsByClassName('content__my-posts')[0];
-// const exploreIcon = document.getElementsByClassName("explore-icon")[0];
+let postsContent = document.getElementsByClassName('my-posts__container')[0];
+let posts = document.getElementsByClassName('content__my-posts')[0];
+
+//grab timeline section
+let timeline = document.getElementsByClassName('timeline-wrapper')[0];
+let timelineContainer = document.getElementsByClassName('content__timeline')[0];
+
+// grab SIDEBAR section
+let sidebar = document.getElementsByClassName('app__sidebar')[0];
+let home = document.getElementsByClassName('sidebar__home')[0];
+let sidebarExplore = document.getElementsByClassName('sidebar__explore')[0];
+const profileIcon = document.getElementsByClassName('sidebar__profile')[0];
+
+//grab profile section
+
+const profileForm = document.getElementsByClassName('content__profile')[0];
 
 // get profile elements
 let profileTopName = document.getElementsByClassName('profile__name')[0];
 let tweetCount = document.getElementsByClassName('profile-quantity')[0];
 let profileBottomHandle = document.getElementsByClassName('profile__handle')[0];
 let profileBottomName = document.getElementsByClassName('profile__name')[0];
+let joined = document.getElementsByClassName('profile__date-joined-txt')[0];
+let profileAvatar = document.getElementsByClassName('profile__avatar')[0];
+let logOut = document.getElementsByClassName('profile__logout')[0];
 
-let mobileSearch = document.getElementsByClassName('app__mobile-search')[0];
+// grab CONTENT section
 let appContent = document.getElementsByClassName('app__content')[0];
 
+// grab TRENDING section
 let trending = document.getElementsByClassName('app__trending')[0];
+
+// grab SEARCH elems
+let mobileSearch = document.getElementsByClassName('app__mobile-search')[0];
+let searchUsernameNode = document.getElementsByClassName(
+   'search__results-by-username'
+)[0];
+let searchInpNode = document.getElementsByClassName('search__input')[0];
 
 mobileSearch.addEventListener('click', () => {
    appContent.style.display = 'none';
    trending.style.display = 'block';
 });
-
 let hamburger = document.getElementsByClassName('app__hamburger')[0];
+
+//!=================LAUNCH EVENT-LISTENERS========================
+
+// reveal register form upon cliking the register title
+registerTitle.addEventListener('click', e => {
+   registerForm.classList.remove('hide');
+   registerTitle.style.color = '#1d9bf0';
+   loginTitle.style.color = 'white';
+   loginForm.classList.add('hide');
+});
+
+//reveal login form upon clicking the login title
+loginTitle.addEventListener('click', e => {
+   loginForm.classList.remove('hide');
+   loginTitle.style.color = '#1d9bf0';
+   registerTitle.style.color = 'white';
+   registerForm.classList.add('hide');
+});
+
+// reveal sidebar upon cliking hamburger icon
 hamburger.addEventListener('click', () => {
    sidebar.style.display = 'block';
 });
 
-async function countPosts() {
-   let countPosts = await getData('posts', userId);
-   let postCount = countPosts.length;
-   return postCount;
-}
-
+// show HOME MY-POSTS section on clicking the HOME item
 home.addEventListener('click', () => {
    profileForm.classList.add('hide');
    postForm.classList.remove('hide');
@@ -120,6 +154,8 @@ home.addEventListener('click', () => {
    }
 });
 
+// show PROFILE section on clicking PROFILE icon
+
 profileIcon.addEventListener('click', () => {
    profileForm.classList.remove('hide');
    postForm.classList.add('hide');
@@ -132,19 +168,13 @@ profileIcon.addEventListener('click', () => {
    }
 });
 
-let timeline = document.getElementsByClassName('timeline-wrapper')[0];
-console.log(timeline);
-
-let timelineContainer = document.getElementsByClassName('content__timeline')[0];
-let logOut = document.getElementsByClassName('profile__logout')[0];
-
+// logout current user upon clicking LOGOUT
 logOut.addEventListener('click', () => {
    setLogIn(false);
    location.reload();
 });
 
-let posts = document.getElementsByClassName('content__my-posts')[0];
-
+// show EXPLORE section upon clicking EXPLORE item
 sidebarExplore.addEventListener('click', () => {
    profileForm.classList.add('hide');
    posts.classList.add('hide');
@@ -158,20 +188,23 @@ sidebarExplore.addEventListener('click', () => {
    }
 });
 
-// listeners
+// login user when clicking LOGIN button
 btnLogin.addEventListener('click', async function () {
    await loginUser();
 });
+
+// create new user when clicking LOGIN button
 btnCreate.addEventListener('click', async function () {
    await createNewUser();
 });
 
+// create new post when clicking TWEET button
 postBtnAdd.addEventListener('click', async function () {
    await createNewPost('post');
    await renderPosts();
 });
 
-//event delegation for timeline
+//event delegation for the whole APP
 
 container.addEventListener('click', async function (e) {
    if (e.target.classList.contains('posts__post-likes-heart')) {
@@ -217,46 +250,64 @@ container.addEventListener('click', async function (e) {
 // event delegation for delete and edit of posts
 postsContent.addEventListener('click', async function (e) {
    if (e.target.classList.contains('posts__post-delete')) {
-      console.log(parseInt(e.target.id));
-
       await deleteData('post', parseInt(e.target.id));
    } else if (e.target.classList.contains('posts__post-edit')) {
-      console.log(true);
-      // console.log(e.target.id);
       let currPostTitle = document.getElementById('title-' + e.target.id);
-      // console.log(currPostTitle);
       let currPostBody = document.getElementById('body-' + e.target.id);
       let currPostImg = document.getElementById('img-' + e.target.id);
       editModal.classList.remove('hide');
       modalUpdateTitle.value = currPostTitle.textContent;
       modalUpdateBody.value = currPostBody.innerText;
       modalUpdateImg.value = currPostImg.innerText;
-
-      // editModal.classList.remove("hide");
-      // modalUpdateTitle.value =
       modalUpdateBtn.addEventListener('click', async function () {
          let editedPostObj = {};
          editedPostObj.title = modalUpdateTitle.value;
          editedPostObj.body = modalUpdateBody.value;
          editedPostObj.imgUrl = modalUpdateImg.value;
-
-         console.log(editedPostObj.title);
          await setData('editedPost', editedPostObj, parseInt(e.target.id));
          editModal.classList.add('hide');
       });
    }
 });
 
+// get current date
+
+function getDate() {
+   let date = new Date();
+   let buildDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`;
+   return buildDate;
+}
+
+//count posts
+
+async function countPosts() {
+   let countPosts = await getData('posts', userId);
+   let postCount = countPosts.length;
+   return postCount;
+}
+
 // create new user
 async function createNewUser() {
-   users = await getData('users');
-   users.forEach(user => {
-      if (inpUserCreate.value === user.username) {
-         inpUserCreate.value = 'username is taken';
-         inpUserCreate.style.borderColor = 'red';
+   let users = await getData('users');
+   if (
+      inpName.value === '' ||
+      inpUserCreate.value === '' ||
+      inpPassCreate.value === ''
+   ) {
+      createMsg.innerText = 'Please, fill out the required fields';
+      createMsg.style.color = 'red';
+      return;
+   }
+   for (let user in users) {
+      console.log(user.username);
+      if (inpUserCreate.value === users[user].username) {
+         createMsg.innerText = 'username is taken';
+         createMsg.style.color = 'red';
+         inpUserCreate.value = '';
          return;
       }
-   });
+   }
+
    createMsg.innerText = 'Creating your account...';
    createMsg.style.color = 'orange';
    const newUser = {
@@ -267,13 +318,22 @@ async function createNewUser() {
       password: inpPassCreate.value,
       userPic: 'https://xsgames.co/randomusers/avatar.php?g=pixel',
       posts: [],
+      followed: [],
       dateJoined: getDate(),
    };
-
+   clearCreateInputs();
    await setData('user', newUser);
    createMsg.innerText =
       'You account has been successfuly created. Use your credentials to login';
    createMsg.style.color = 'green';
+}
+
+function clearCreateInputs() {
+   inpName.value = '';
+   inpLastName.value = '';
+   inpEmailCreate.value = '';
+   inpUserCreate.value = '';
+   inpPassCreate.value = '';
 }
 
 async function createNewPost(type, sharedPostId) {
@@ -302,15 +362,13 @@ async function createNewPost(type, sharedPostId) {
    }
    await setData('post', newPostObj);
 }
+
 // delete data
 async function deleteData(type, id) {
    if (type === 'user' && id) {
       await fetch(`${API}/${id}`, {method: 'DELETE'});
    } else if (type === 'post') {
       let posts = await getData('posts');
-
-      // console.log(type);
-      console.log(id);
       posts.forEach((post, index) => {
          if (post.postId === id) {
             posts.splice(index, 1);
@@ -350,7 +408,6 @@ async function loginUser() {
          inpUserLogin.value === users[i].username &&
          inpPassLogin.value === users[i].password
       ) {
-         console.log(createMsg);
          createMsg.innerText = 'User found. Logging in...';
          createMsg.style.color = 'green';
          isUserAuthenticated = true;
@@ -383,7 +440,6 @@ async function checkLogin() {
             setUserGlobals(users[i]);
             await setProfileData(users[i]);
             await renderPosts();
-
             break;
          }
       }
@@ -407,6 +463,7 @@ async function setProfileData(userObj) {
    profileBottomName.innerText = `${userName} ${userlName}`;
    console.log(userObj.dateJoined);
    joined.innerText = 'Date joined ' + userObj.dateJoined;
+   profileAvatar.innerHTML = `<img src="${userObj.userPic}">`;
 }
 
 checkLogin();
@@ -461,10 +518,7 @@ async function setLike(status, id, uId) {
    }
 }
 
-async function getLike() {}
-
 async function getTimelinePosts() {
-   console.log('rendering timeline');
    let users = await getData('users');
    postsContent.innerHTML = '';
    timeline.innerHTML = '';
@@ -473,9 +527,6 @@ async function getTimelinePosts() {
    });
 
    currentUser.renderPosts = false;
-   console.log(currentUser.renderPosts);
-   // event handler for post wrapper
-   // console.log(postIcons);
 }
 
 async function renderPosts() {
@@ -489,8 +540,8 @@ async function renderPosts() {
 function postRenderer(element, user, posts, type) {
    posts.forEach(post => {
       console.log(post.likes);
-      element.innerHTML += `<div id="${
-         post.postId
+      element.innerHTML += `<div id="${post.postId}" name = "${
+         user.id
       }" class="posts__post-wrapper">
       <div class="post__header> 
          <img class="userpic" src="${user.userPic}">
@@ -543,12 +594,12 @@ function postRenderer(element, user, posts, type) {
 </div>`;
       renderComments(post);
       renderLikes(post);
-      showLikeTooltip(post.postId);
+      // showLikeTooltip(post.postId);
       console.log(post.likes);
    });
 }
 
-function showLikeTooltip(postId) {}
+function renderUserProfile() {}
 
 function renderComments(post) {
    let postSection = document.getElementsByName(`cs-${post.postId}`)[0];
@@ -583,6 +634,21 @@ async function postComments(data, uId, postId) {
    // console.log(posts);
 }
 
+searchInpNode.addEventListener('input', async function () {
+   await renderSearchByUsername();
+});
+
+async function renderSearchByUsername() {
+   let searchResult = await getData('searchUsers');
+   searchUsernameNode.innerHTML = '';
+   if (searchInpNode.value !== '') {
+      searchResult.forEach(user => {
+         searchUsernameNode.innerHTML += `<li>${user.username}</li>`;
+      });
+   } else {
+      searchUsernameNode.innerHTML = '';
+   }
+}
 // get data from JSON server
 async function getData(type, id) {
    if (type === 'users') {
@@ -597,13 +663,18 @@ async function getData(type, id) {
       const response = await fetch(`${API}/${id}`);
       const result = await response.json();
       return result.posts;
+   } else if (type === 'searchUsers') {
+      const response = await fetch(
+         `${API}?username_like=${searchInpNode.value}`
+      );
+      const result = await response.json();
+      return result;
    }
 }
 
 // write data to JSON server
 async function setData(type, data, id) {
    if (type === 'user') {
-      console.log('newuser', data);
       const options = {
          method: 'POST',
          headers: {
@@ -626,7 +697,6 @@ async function setData(type, data, id) {
       await fetch(`${API}/${userId}`, options);
    } else if (type === 'editedPost' && id) {
       let posts = await getData('posts');
-      console.log(data);
       posts.forEach(post => {
          if (post.postId === id) {
             post.title = data.title;
@@ -651,63 +721,15 @@ async function setData(type, data, id) {
    }
 }
 
-// function to test writing and getting data from JSON server
-async function test() {
-   let result = await getData();
-   console.log(result);
-}
-// test();
-
-// remove all data from JSON server
-async function nukeAll() {
-   let users = await getData('users');
-   users.forEach(user => {
-      deleteData('user', user.id);
-   });
-}
-
 // nukeAll();
 
 // show registration
-const registerTitle = document.getElementsByClassName(
-   'first-screen__register-title'
-)[0];
-const loginTitle = document.getElementsByClassName(
-   'first-screen__login-title'
-)[0];
-const registerForm = document.getElementsByClassName('first-screen__create')[0];
-const loginForm = document.getElementsByClassName('first-screen__login')[0];
-
-registerTitle.addEventListener('click', e => {
-   registerForm.classList.remove('hide');
-   registerTitle.style.color = '#1d9bf0';
-   loginTitle.style.color = 'white';
-   loginForm.classList.add('hide');
-});
-
-loginTitle.addEventListener('click', e => {
-   loginForm.classList.remove('hide');
-   loginTitle.style.color = '#1d9bf0';
-   registerTitle.style.color = 'white';
-   registerForm.classList.add('hide');
-});
-
-// console.log(exploreIcon);
-// exploreIcon.addEventListener("click", () => {
-//   console.log(profileForm);
-//   console.log(1);
-//   profileForm.classList.add("hide");
-//   postForm.classList.remove("hide");
-// });
 
 async function renderLikes(post) {
    let tooltipNode = document
       .getElementById(post.postId)
       .getElementsByClassName('posts__post-likes-tooltip')[0];
-   // console.log(`tooltip`, tooltipNode);
    for (likeObj in post.likes) {
-      // console.log('likeObj', post.likes[likeObj]);
-      // console.log(await getUserName(likeObj.userLikeId));
       tooltipNode.innerHTML += `<li>${await getUserName(
          post.likes[likeObj].userLikeId
       )}</li>`;
@@ -722,5 +744,21 @@ async function renderLikes(post) {
    });
    heart.addEventListener('mouseout', () => {
       tooltipNode.classList.add('hide');
+   });
+}
+
+// ! ======================= DEV SECTION ==============================
+// function to test writing and getting data from JSON server
+async function test() {
+   let result = await getData();
+   console.log(result);
+}
+// test();
+
+// remove all data from JSON server
+async function nukeAll() {
+   let users = await getData('users');
+   users.forEach(user => {
+      deleteData('user', user.id);
    });
 }

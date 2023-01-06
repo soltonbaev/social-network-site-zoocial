@@ -44,7 +44,7 @@
             <input
                class="first-screen__create-name first-screen__input app__input"
                type="text"
-               placeholder="First Name"
+               placeholder="First Name*"
             />
             <input
                class="first-screen__create-lname first-screen__input app__input"
@@ -59,13 +59,13 @@
             <input
                class="first-screen__create-user first-screen__input app__input"
                type="text"
-               placeholder="username"
+               placeholder="username*"
             />
 
             <input
                class="first-screen__create-pass first-screen__input app__input"
                type="password"
-               placeholder="create a password"
+               placeholder="create a password*"
             />
             <button class="first-screen__create-btn app__btn">Create</button>
          </div>
@@ -149,6 +149,7 @@
             </div>
             <div class="content__profile profile hide">
                <div class="profile__top-info">
+                  <h2 class="app__heading">My profile</h2>
                   <span class="profile__name">KENCIK</span
                   ><span class="profile__logout"> Log Out</span>
                   <p class="profile-quantity">208 tweets</p>
@@ -177,6 +178,38 @@
                   </div>
                </div>
             </div>
+            <div class="content__profile-user profile-user hide">
+               <div class="profile-user__top-info">
+                  <h2 class="app__heading">My profile</h2>
+                  <span class="profile-user__name"></span>
+                  <p class="profile-quantity"></p>
+               </div>
+               <div class="profile-user__images">
+                  <img
+                     class="profile__background-cover"
+                     src="https://picsum.photos/600/200"
+                     alt=""
+                  />
+                  <span class="profile-user__avatar"
+                     ><img src="./images/round.png" alt=""
+                  /></span>
+               </div>
+               <div class="profile-user-names">
+                  <p class="profile-user__handle"></p>
+               </div>
+               <div class="profile-user__left-bottom-info">
+                  <div class="profile-user__location">
+                     <img src="./images/info.svg" alt="" />
+                     <p>Osh</p>
+                  </div>
+                  <div class="profile-user__date-joined">
+                     <img src="./images/calendar.svg" alt="" />
+                     <p class="profile-user__date-joined-txt">
+                        Joined October 2021
+                     </p>
+                  </div>
+               </div>
+            </div>
             <div class="content__timeline hide">
                <div class="timeline-wrapper">
                   <div class="timeline__posts"></div>
@@ -191,7 +224,11 @@
                   type="text"
                   placeholder="Search Twitter"
                />
+               <div class="search__results">
+                  <div class="search__results-by-username"></div>
+               </div>
             </div>
+
             <div class="news">
                <h2 class="news__title">Trends for you</h2>
                <div class="news-item">
