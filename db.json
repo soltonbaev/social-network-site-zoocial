@@ -1,0 +1,89 @@
+{
+  "zoocial": [
+    {
+      "name": "Ibraim",
+      "lastName": "",
+      "email": "",
+      "username": "soltonbaev",
+      "password": "1234",
+      "userPic": "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      "posts": [
+        {
+          "title": "Hello",
+          "body": "Lorem ipsum",
+          "imgUrl": "https://api.lorem.space/image?w=150&h=180",
+          "postId": 1673434217770,
+          "postDate": "2023-0-3 16:50",
+          "likes": [
+            {
+              "userLikeId": 1,
+              "likeStatus": true
+            }
+          ],
+          "comments": [
+            {
+              "author": "Ibraim",
+              "authorId": 1,
+              "commentBody": "fasdfasdf",
+              "timeCreated": "2023-0-3 16:51"
+            },
+            {
+              "author": "Ibraim",
+              "authorId": 1,
+              "commentBody": "fasdfasdf",
+              "timeCreated": "2023-0-3 16:51"
+            }
+          ],
+          "sharedby": [],
+          "type": "post",
+          "sharedPostId": ""
+        },
+        {
+          "title": "Attention",
+          "body": "Lorem ipsumfasdfajsdlfjkasl;dfjkalsdkjf\nfasdfasdfasdfdf",
+          "imgUrl": "https://api.lorem.space/image?w=150&h=180",
+          "postId": 1673434267587,
+          "postDate": "2023-0-3 16:51",
+          "likes": [],
+          "comments": [],
+          "sharedby": [],
+          "type": "post",
+          "sharedPostId": ""
+        }
+      ],
+      "followed": [],
+      "dateJoined": "2023-0-6 15:5",
+      "createdAt": 1673082300864,
+      "json-serverId": "api",
+      "id": 1
+    },
+    {
+      "name": "Donald",
+      "lastName": "",
+      "email": "",
+      "username": "donald",
+      "password": "1234",
+      "userPic": "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      "posts": [],
+      "followed": [],
+      "dateJoined": "2023-0-6 15:19",
+      "createdAt": 1673083166953,
+      "json-serverId": "api",
+      "id": 2
+    },
+    {
+      "name": "Barack",
+      "lastName": "Obama",
+      "email": "",
+      "username": "obama",
+      "password": "1234",
+      "userPic": "https://xsgames.co/randomusers/avatar.php?g=pixel",
+      "posts": [],
+      "followed": [],
+      "dateJoined": "2023-0-6 15:29",
+      "createdAt": 1673083766708,
+      "json-serverId": "api",
+      "id": 3
+    }
+  ]
+}
