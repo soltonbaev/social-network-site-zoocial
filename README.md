@@ -14,3 +14,5 @@ Planning to:
 This project was created as a part of collaborative Hackathon
 
 Copyright 2022 [Ibraim Solonbaev](https://soltonbaev.com) & [Isken Kalbaev](https://github.com/17seventeeeeen?tab=repositories)
+
+[Try the live demo of this app!](https://soltonbaev.com/projects/zoocial-network/)
